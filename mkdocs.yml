@@ -105,15 +105,15 @@ nav:
     - 'Network Testing with Pytest and PyATS': courses/network-testing-pytest-pyats.md
     - 'Network Automation with PyATS': courses/network-automation-pyats.md
     - 'Network Unit Testing with NUTS': courses/network-unit-testing-nuts.md
-    - 'Cursussen Nederlands': courses_NL.md
-    - 'Python voor Netwerk Engineers': courses_NL/python-voor-netwerk-engineers.md
-    - 'Ansible voor Netwerk Automatisering': courses_NL/ansible-voor-netwerk-automatisering.md
-    - 'Introductie Source of Truth': courses_NL/intro-source-of-truth.md
-    - 'Nautobot Closed Loop Automatisering': courses_NL/nautobot-closed-loop-automatisering.md
-    - 'Nautobot Job Ontwikkeling': courses_NL/nautobot-job-ontwikkeling.md
-    - 'Netwerk Testen met Pytest en PyATS': courses_NL/netwerk-testen-pytest-pyats.md
-    - 'Netwerk Automatisering met PyATS': courses_NL/netwerk-automatisering-pyats.md
-    - 'Netwerk Unit Testen met NUTS': courses_NL/netwerk-unit-testen-nuts.md
+    # - 'Cursussen Nederlands': courses_NL.md
+    # - 'Python voor Netwerk Engineers': courses_NL/python-voor-netwerk-engineers.md
+    # - 'Ansible voor Netwerk Automatisering': courses_NL/ansible-voor-netwerk-automatisering.md
+    # - 'Introductie Source of Truth': courses_NL/intro-source-of-truth.md
+    # - 'Nautobot Closed Loop Automatisering': courses_NL/nautobot-closed-loop-automatisering.md
+    # - 'Nautobot Job Ontwikkeling': courses_NL/nautobot-job-ontwikkeling.md
+    # - 'Netwerk Testen met Pytest en PyATS': courses_NL/netwerk-testen-pytest-pyats.md
+    # - 'Netwerk Automatisering met PyATS': courses_NL/netwerk-automatisering-pyats.md
+    # - 'Netwerk Unit Testen met NUTS': courses_NL/netwerk-unit-testen-nuts.md
   - About: about-bart-smeding.md
   - Privacy Policy: privacy.md
 
