@@ -60,6 +60,25 @@ bash -c "$(curl -sL https://get.containerlab.dev)"
 containerlab version
 ```
 
+## Add useraccount to groups
+Add your user account to the following groups:
+
+```bash
+sudo usermod -a -G docker <username>
+sudo usermod -a -G clab_admins <username>
+```
+
+!!! info "When is each group needed?"
+    - **`docker`** — Required for Containerlab to talk to the Docker daemon (pull images, create and run lab containers). Without it, you cannot run labs.
+    - **`clab_admins`** — Only needed when the Containerlab binary is installed with the SUID bit and restricted to this group. Then only root or users in `clab_admins` are allowed to run `containerlab`.
+
+    After adding yourself to a group, log out and back in (or reboot) so the new group membership takes effect.
+
+!!! warning "Root-level privileges"
+    Much like the docker group, any users part of the `clab_admins` group are effectively given root-level privileges to the system running Containerlab.
+
+    If this group does not exist and the binary still has the SUID bit set, any user who can run Containerlab should be treated as having root privileges.
+
 ## Downloading Network Images
 
 Containerlab supports various network vendor images. Here's how to download and import the most popular ones:

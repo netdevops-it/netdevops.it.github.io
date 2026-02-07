@@ -34,11 +34,11 @@ nav:
     - 'Nautobot the ultimate network CMDB': nautobot_the_ultimate_network_cmdb.md
     - 'Nautobot Docker Apps': blog/posts/2025/2025-04-10-nautobot-docker-apps.md
     - 'Import Device Types into Nautobot': blog/posts/2025/2025-09-16-import-device-types-into-nautobot.md
-    - 'Nautobot Zero to Hero':
-      - 'Overview': tutorials/nautobot_zero_to_hero/00_nautobot-zero-to-hero-landings-page.md
-      - 'Part 1: Install Nautobot in 5 minutes': tutorials/nautobot_zero_to_hero/01_nautobot-zero-to-hero-part1.md
-      - 'Part 2: Getting Started with Nautobot': tutorials/nautobot_zero_to_hero/02_nautobot-zero-to-hero-part2.md
-      - 'Part 3: Deploy Network with Containerlab': tutorials/nautobot_zero_to_hero/03_nautobot-zero-to-hero-part3.md
+    # - 'Nautobot Zero to Hero':
+    #   - 'Overview': tutorials/nautobot_zero_to_hero/00_nautobot-zero-to-hero-landings-page.md
+    #   - 'Part 1: Install Nautobot in 5 minutes': tutorials/nautobot_zero_to_hero/01_nautobot-zero-to-hero-part1.md
+    #   - 'Part 2: Getting Started with Nautobot': tutorials/nautobot_zero_to_hero/02_nautobot-zero-to-hero-part2.md
+    #   - 'Part 3: Deploy Network with Containerlab': tutorials/nautobot_zero_to_hero/03_nautobot-zero-to-hero-part3.md
     # - 'Nautobot Jobs': nautobot_jobs.md
     # - 'Nautobot Plugins': nautobot_plugins.md
   - Docker:
@@ -97,7 +97,23 @@ nav:
     - 'Rat of Fortune': wheel.md
   - Courses:
     - 'Courses': courses.md
-    - 'Courses Dutch': courses_NL.md
+    - 'Python for Network Engineers': courses/python-for-network-engineers.md
+    - 'Ansible for Network Automation': courses/ansible-for-network-automation.md
+    - 'Intro to Source of Truth': courses/intro-to-source-of-truth.md
+    - 'Nautobot Closed Loop Automation': courses/nautobot-closed-loop-automation.md
+    - 'Nautobot Job Development': courses/nautobot-job-development.md
+    - 'Network Testing with Pytest and PyATS': courses/network-testing-pytest-pyats.md
+    - 'Network Automation with PyATS': courses/network-automation-pyats.md
+    - 'Network Unit Testing with NUTS': courses/network-unit-testing-nuts.md
+    - 'Cursussen Nederlands': courses_NL.md
+    - 'Python voor Netwerk Engineers': courses_NL/python-voor-netwerk-engineers.md
+    - 'Ansible voor Netwerk Automatisering': courses_NL/ansible-voor-netwerk-automatisering.md
+    - 'Introductie Source of Truth': courses_NL/intro-source-of-truth.md
+    - 'Nautobot Closed Loop Automatisering': courses_NL/nautobot-closed-loop-automatisering.md
+    - 'Nautobot Job Ontwikkeling': courses_NL/nautobot-job-ontwikkeling.md
+    - 'Netwerk Testen met Pytest en PyATS': courses_NL/netwerk-testen-pytest-pyats.md
+    - 'Netwerk Automatisering met PyATS': courses_NL/netwerk-automatisering-pyats.md
+    - 'Netwerk Unit Testen met NUTS': courses_NL/netwerk-unit-testen-nuts.md
   - About: about-bart-smeding.md
   - Privacy Policy: privacy.md
 
