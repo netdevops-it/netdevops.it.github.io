@@ -10,8 +10,7 @@ tags:
   - tutorials
   - sso
   - docker
-  - about
-summary: NetDevOps.it is your resource hub for network automation, Ansible, Docker, SSO, and DevOps tutorials, roles, and best practices.
+summary: NetDevOps.it is your resource hub for network automation, tutorials, courses, and DevOps content. Ansible roles and Docker images by Bart Smeding live on bartsmeding.nl.
 ---
 
 # Welcome to NetDevOps.it
@@ -60,24 +59,9 @@ In traditional network operations, changes are often manual, error-prone, and sl
 
 NetDevOps.it is more than just a blog — it's a comprehensive resource library for network engineers. Here's what you can expect:
 
-### 🛠️ **Ansible Roles and Collections**
-- **Ready-to-use Ansible roles** for common network automation tasks
-- **Custom collections** to accelerate your automation projects
-- **Best practices** and patterns for writing maintainable automation code
-- **Examples** for Cisco IOS, Arista, Nexus, and other network platforms
+### 🛠️ **Ansible roles & Docker images (author-maintained)**
 
-**Available Roles:**
-
-- [Ansible Role: GitLab Docker](ansible/ansible_role_gitlab_docker.md) - Deploy GitLab CE with Docker
-- [Ansible Role: AWX Docker](ansible/ansible_role_awx_docker.md) - Deploy AWX/Ansible Tower with Docker
-- [Ansible Role: Nautobot Docker](ansible/ansible_role_nautobot_docker.md) - Deploy Nautobot with Docker
-- [Ansible Role: Nginx Docker](ansible/ansible_role_nginx_docker.md) - Deploy Nginx with Docker
-- [Ansible Role: Docker](ansible/ansible_role_docker.md) - Install and configure Docker
-- [Ansible Role: SWAG Docker](ansible/ansible_role_swag_docker.md) - Deploy SWAG (Secure Web Application Gateway)
-
-**Collections and Resources:**
-
-- [Ansible Roles and Collections Overview](ansible_roles_and_collections.md) - Complete guide to available automation resources
+Roles, collections overview, and Docker Hub images I build and maintain are documented on my **[personal site — bartsmeding.nl](https://bartsmeding.nl/)** (e.g. [Ansible Roles & Collections](https://bartsmeding.nl/ansible_roles_and_collections/), [Docker images](https://bartsmeding.nl/docker_images/)). NetDevOps.it stays focused on tutorials, blog posts, and courses.
 
 ### 📚 **Step-by-Step Tutorials**
 - **Ansible fundamentals** - from basic concepts to advanced techniques
@@ -109,16 +93,7 @@ NetDevOps.it is more than just a blog — it's a comprehensive resource library 
 
 **Nautobot Resources:**
 - [Nautobot as SSoT/CMDB](nautobot_ssot.md) - Comprehensive guide to using Nautobot
-- [Docker Container: Nautobot](docker/docker_conatiner_nautobot.md) - Nautobot container deployment
-
-### 🐳 **Docker Images and Containers**
-- **Pre-built automation environments** to speed up your development
-- **Containerized tools** for consistent deployment across environments
-- **CI/CD ready images** for automated testing and deployment
-
-**Docker Resources:**
-- [Docker Images Overview](docker_images.md) - Complete guide to available Docker images
-- [Docker Container: Nautobot](docker/docker_conatiner_nautobot.md) - Nautobot container deployment
+- [Nautobot container image (author)](https://bartsmeding.nl/docker/docker_conatiner_nautobot/) — Docker image details on bartsmeding.nl
 
 ### 🔐 **SSO and Authentication Solutions**
 - **Identity management** for network automation platforms
@@ -171,14 +146,9 @@ NetDevOps.it is more than just a blog — it's a comprehensive resource library 
 - [Courses Overview](courses.md) - Available training programs
 - [Courses (Dutch)](courses_NL.md) - Training programs in Dutch
 
-### 🤖 **AI in Networking**
-- **Artificial Intelligence** applications in network automation
-- **Machine Learning** for network optimization
-- **AI-powered tools** and platforms
+### 🤖 **AI in networking**
 
-**AI Resources:**
-
-- [AI in Networking](ai/ai_in_networking.md) - Artificial Intelligence applications in network automation
+For **AI in networking** (CMDB, devices, agents), see **[AI in networking on bartsmeding.nl](https://bartsmeding.nl/ai/ai_in_networking/)**.
 
 ---
 
@@ -205,21 +175,9 @@ NetDevOps.it is more than just a blog — it's a comprehensive resource library 
 
 ---
 
-## About Me
+## Site author
 
-Hi, I'm **Bart Smeding** — a passionate Network Automation Solutions Architect with years of experience helping companies transform their network operations. My mission is to guide organizations on their journey from **zero to hero** in network automation.
-
-I specialize in:
-- **Blueprint Strategies:** Crafting tailored automation roadmaps
-- **Infrastructure Setup:** Deploying the necessary tools and platforms
-- **Brownfield Onboarding:** Seamlessly integrating existing environments
-- **Device Deployment:** Automating network device rollouts
-- **3rd-Party Tool Integration:** Bridging the gap between diverse systems
-- **Engineer Enablement:** Empowering in-house teams with education and resources to extend and sustain the automation framework
-
-All solutions are built with a preference for **open-source tools**, **custom scripts**, and **collaborative learning** to ensure sustainability and adaptability.
-
-For more about me, visit my [About page](about.md) or [LinkedIn profile](https://www.linkedin.com/in/bartsmeding/).
+This site is maintained by **Bart Smeding**. For a profile, open-source roles and Docker images, and contact details, see **[bartsmeding.nl](https://bartsmeding.nl/)**. You can also connect on [LinkedIn](https://www.linkedin.com/in/bartsmeding/).
 
 ---
 
@@ -232,7 +190,7 @@ For more about me, visit my [About page](about.md) or [LinkedIn profile](https:/
 - [Getting Started with Network Automation](blog/posts/2025/2025-03-17-getting-started-network-automation.md)
 
 ### 🛠️ **Automation Tools**
-- [Ansible Roles and Collections](ansible_roles_and_collections.md)
+- [Ansible roles & Docker (author)](https://bartsmeding.nl/ansible_roles_and_collections/)
 - [Ansible Tutorials](tutorials.md)
 - [Ansible Tool Guide](blog/posts/tools/ansible.md)
 
@@ -241,8 +199,8 @@ For more about me, visit my [About page](about.md) or [LinkedIn profile](https:/
 - [Nautobot Docker Apps](blog/posts/2025/2025-04-10-nautobot-docker-apps.md)
 
 ### 🐳 **Container Solutions**
-- [Docker Images](docker_images.md)
-- [Docker Container: Nautobot](docker/docker_conatiner_nautobot.md)
+- [Docker images (author)](https://bartsmeding.nl/docker_images/)
+- [Nautobot container image (author)](https://bartsmeding.nl/docker/docker_conatiner_nautobot/)
 
 ### 🔐 **Security & Authentication**
 - [SSO Solutions](sso.md)
@@ -255,11 +213,11 @@ For more about me, visit my [About page](about.md) or [LinkedIn profile](https:/
 ### 🎓 **Learning Resources**
 - [Courses](courses.md)
 - [Tutorials Index](tutorials.md)
-- [AI in Networking](ai/ai_in_networking.md)
+- [AI in networking (author)](https://bartsmeding.nl/ai/ai_in_networking/)
 
-### 👤 **About & Contact**
-- [About Bart Smeding](about.md)
-- [LinkedIn Profile](https://www.linkedin.com/in/bartsmeding/)
+### 👤 **Profile & contact**
+- [bartsmeding.nl](https://bartsmeding.nl/) — profile, Ansible roles, Docker images, contact
+- [LinkedIn](https://www.linkedin.com/in/bartsmeding/)
 
 ---
 

@@ -29,6 +29,6 @@ summary: Docker is a platform for building, running, and managing containers for
 - [Official Docker Documentation](https://docs.docker.com/)
 - [Docker Hub](https://hub.docker.com/)
 - [Monitoring with Docker: Blog Post](/blog/posts/2024/2024-11-15-netdata-monitoring-system/)
-- [Docker Images Overview](/docker_images/)
+- [Docker Images Overview](https://bartsmeding.nl/docker_images/) (author-maintained images on bartsmeding.nl)
 
 For more on using Docker in network automation, see the [NetDevOps Tools Index](/tools/). 

@@ -31,10 +31,10 @@ SSO enables users to log in once and gain access to a variety of systems without
 ## SSO in Network Automation
 Many of the roles and solutions on this site support SSO out of the box or via integration:
 
-- **Nginx Docker:** Can be configured as a reverse proxy with LDAP or Authelia SSO ([see role doc](ansible/ansible_role_nginx_docker.md))
-- **SWAG (Secure Web Application Gateway):** Supports LDAP and Authelia for SSO ([see role doc](ansible/ansible_role_swag_docker.md))
-- **GitLab CE Docker:** Integrates with LDAP for SSO ([see role doc](ansible/ansible_role_gitlab_docker.md))
-- **Nautobot Docker:** Supports LDAP authentication for SSO ([see role doc](ansible/ansible_role_nautobot_docker.md))
+- **Nginx Docker:** Can be configured as a reverse proxy with LDAP or Authelia SSO ([see role doc](https://bartsmeding.nl/ansible/ansible_role_nginx_docker/))
+- **SWAG (Secure Web Application Gateway):** Supports LDAP and Authelia for SSO ([see role doc](https://bartsmeding.nl/ansible/ansible_role_swag_docker/))
+- **GitLab CE Docker:** Integrates with LDAP for SSO ([see role doc](https://bartsmeding.nl/ansible/ansible_role_gitlab_docker/))
+- **Nautobot Docker:** Supports LDAP authentication for SSO ([see role doc](https://bartsmeding.nl/ansible/ansible_role_nautobot_docker/))
 
 ## How to Integrate SSO
 1. **Set up an LDAP or Authelia server** (see tutorials or use a role)
@@ -43,10 +43,10 @@ Many of the roles and solutions on this site support SSO out of the box or via i
 4. **Test login and access control**
 
 ## Related Tutorials and Docs
-- [Nginx Docker Role](ansible/ansible_role_nginx_docker.md)
-- [SWAG Docker Role](ansible/ansible_role_swag_docker.md)
-- [GitLab CE Docker Role](ansible/ansible_role_gitlab_docker.md)
-- [Nautobot Docker Role](ansible/ansible_role_nautobot_docker.md)
+- [Nginx Docker Role](https://bartsmeding.nl/ansible/ansible_role_nginx_docker/)
+- [SWAG Docker Role](https://bartsmeding.nl/ansible/ansible_role_swag_docker/)
+- [GitLab CE Docker Role](https://bartsmeding.nl/ansible/ansible_role_gitlab_docker/)
+- [Nautobot Docker Role](https://bartsmeding.nl/ansible/ansible_role_nautobot_docker/)
 - [LDAP/Authelia setup (coming soon)]
 
 ---

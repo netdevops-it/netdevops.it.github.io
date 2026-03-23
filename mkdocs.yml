@@ -22,14 +22,6 @@ plugins:
 
 nav:
   - Home: index.md
-  - Ansible:
-    - 'Ansible Roles & Collections': ansible_roles_and_collections.md
-    - 'bsmeding.docker': ansible/ansible_role_docker.md
-    - 'bsmeding.nautobot_docker': ansible/ansible_role_nautobot_docker.md
-    - 'bsmeding.awx_docker': ansible/ansible_role_awx_docker.md
-    - 'bsmeding.nginx_docker': ansible/ansible_role_nginx_docker.md
-    - 'bsmeding.gitlab_ce_docker': ansible/ansible_role_gitlab_docker.md
-    - 'bsmeding.swag_docker': ansible/ansible_role_swag_docker.md
   - Nautobot:
     - 'Nautobot the ultimate network CMDB': nautobot_the_ultimate_network_cmdb.md
     - 'Nautobot Docker Apps': blog/posts/2025/2025-04-10-nautobot-docker-apps.md
@@ -41,10 +33,6 @@ nav:
     #   - 'Part 3: Deploy Network with Containerlab': tutorials/nautobot_zero_to_hero/03_nautobot-zero-to-hero-part3.md
     # - 'Nautobot Jobs': nautobot_jobs.md
     # - 'Nautobot Plugins': nautobot_plugins.md
-  - Docker:
-    - 'Docker images index': docker_images.md
-  - AI:
-    - 'AI in networking': ai/ai_in_networking.md
   - Blog:
     - blog/index.md  
   - Tutorials:
@@ -114,7 +102,6 @@ nav:
     # - 'Netwerk Testen met Pytest en PyATS': courses_NL/netwerk-testen-pytest-pyats.md
     # - 'Netwerk Automatisering met PyATS': courses_NL/netwerk-automatisering-pyats.md
     # - 'Netwerk Unit Testen met NUTS': courses_NL/netwerk-unit-testen-nuts.md
-  - About: about-bart-smeding.md
   - Privacy Policy: privacy.md
 
 theme:
