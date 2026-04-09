@@ -19,8 +19,6 @@ summary: NetDevOps.it is your resource hub for network automation, tutorials, co
 
 Welcome to **NetDevOps.it**, a hub for network engineers and DevOps enthusiasts seeking to elevate their network automation skills. This site is dedicated to sharing knowledge, tools, and insights for mastering the art of **Network Development Operations**.
 
-> **Note:** This site is under construction. New content is being added regularly, but some sections may not be fully operational yet.
-
 ---
 
 ## What is NetDevOps?
