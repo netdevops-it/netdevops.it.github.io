@@ -52,8 +52,8 @@ Apps are **pinned per Nautobot major** (see the repo README tables and the `requ
 **Nautobot 3.x** (example pins: plugin-nornir 3.2.0, device-lifecycle-mgmt 4.1.1, ssot 4.2.2, golden-config 3.0.5, chatops 4.0.0 with Slack/Teams/Webex/Ansible/Arista extras, and others) includes the same families where a 3.x release exists, with these differences:
 
 * **[Nautobot ChatOps](https://docs.nautobot.com/projects/chatops/en/latest/)** is bundled again on **3.x** (it was dropped from 1.x/2.x images in this stack because of dependency clashes).
-* **Data Validation Engine** is **not** in the 3.x image today—the upstream package still targets Nautobot &lt; 3.0.
-* **UI Plugin** is **not** installed on 3.x (commented out in `requirements-3.x.txt`).
+* **Data Validation Engine** is **not** in the 3.x image as this is now build-in to core.
+* **UI Plugin** is **not** installed on 3.x as of incompatibility.
 
 Read more about the apps on [nautobot_the_ultimate_network_cmdb](/nautobot_the_ultimate_network_cmdb/)
 
