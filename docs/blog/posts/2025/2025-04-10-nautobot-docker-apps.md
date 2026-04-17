@@ -2,7 +2,7 @@
 authors: [bsmeding]
 date: 2025-04-10
 title: Nautobot Docker Images with Pre-Installed Apps
-summary: Discover ready-to-use Nautobot Docker images with all major apps pre-installed. Learn how to deploy Nautobot with Docker Compose and activate the plugins you need—no manual builds or pip installs required.
+summary: Discover ready-to-use Nautobot Docker images with all major apps pre-installed—including Nautobot 3.1 builds alongside 1.x and 2.x. Learn how to deploy with Docker Compose, pick the right image tag, and enable only the plugins you need.
 tags: ["nautobot", "docker", "network automation", "cmdb", "ssot", "plugins", "apps"]
 toc: true
 layout: single
@@ -13,43 +13,58 @@ comments: true
 
 Nautobot is a powerful network automation platform, and with Docker you can easily deploy Nautobot and its ecosystem of apps and plugins. In this post, I'll show you how to get started with Nautobot in Docker, explore some useful apps, and share tips for a smooth deployment.
 
+**Update (2026):** Images now include **Nautobot 3.x** (including **3.1.0** on Docker Hub), refreshed app pins per major release, and a dedicated `requirements-3.x.txt`. The build source lives in [`bsmeding/docker_container_nautobot`](https://github.com/bsmeding/docker_container_nautobot) on GitHub.
+
 <!-- more -->
 
 # Nautobot Docker Images with Pre-Installed Apps
 
-Managing and extending Nautobot with plugins and apps can be challenging, especially for users who are not familiar with Docker, Docker builds, or Python package management. To make things easier, I maintain a set of Docker images based on the official Nautobot images, but with almost all major Nautobot apps pre-installed and ready to use.
+Managing and extending Nautobot with plugins and apps can be challenging, especially for users who are not familiar with Docker, Docker builds, or Python package management. To make things easier, I maintain a set of Docker images based on the upstream **Network to Code** Nautobot images, extended with almost all major Nautobot apps pre-installed and ready to use.
 
-> Due to CVE please dont use version lower than `<1.6.31` and `<2.4.10`! 
+> Due to CVEs, avoid unmaintained patch levels. Prefer current **1.6.x**, **2.4.x**, and **3.0.x / 3.1.x** images from Docker Hub (see the [build matrix](https://github.com/bsmeding/docker_container_nautobot/blob/main/.github/workflows/build.yml) in the repo). Python **3.9**-based tags are discontinued (May 2025 onward) because several apps no longer support that runtime.
 
 ## 🚀 What Are These Images?
-- **Based on the official Nautobot images** (latest two major versions: 1.x and 2.x)
-- **All major Nautobot apps pre-installed** ([see full list of apps](https://docs.nautobot.com/projects/core/en/stable/apps/))
-- **No need to build or install plugins manually**
-- **Just activate the plugins you want** in your `nautobot_config.py`
+- **Based on upstream [`networktocode/nautobot`](https://hub.docker.com/r/networktocode/nautobot)** images, extended with extra OS tools, Ansible, job-friendly Python packages, and pinned Nautobot apps
+- **Published lines:** **1.6.x**, **2.4.x**, **3.0.x**, and **3.1.x** (multi-arch **amd64** and **arm64**), plus `stable` and `latest` tags that follow upstream (today those still resolve to the **2.x** app bundle in the Dockerfile—use an explicit **3.x** tag for Nautobot 3)
+- **Major-specific requirements:** `requirements-1.x.txt`, `requirements-2.x.txt`, and `requirements-3.x.txt` in the [GitHub repo](https://github.com/bsmeding/docker_container_nautobot)
+- **No need to build or install plugins manually** for the bundled set—enable them in `nautobot_config.py`
 - **Available on Docker Hub:** [bsmeding/nautobot](https://hub.docker.com/r/bsmeding/nautobot)
 
 ## 🧩 Included Nautobot Apps
 
-The images include (but are not limited to):
+Apps are **pinned per Nautobot major** (see the repo README tables and the `requirements-*.txt` files). The [Nautobot apps catalog](https://docs.nautobot.com/projects/core/en/stable/apps/) is the authoritative list of names and docs.
+
+**Nautobot 2.x** (example pins: plugin-nornir 2.3.0, device-lifecycle-mgmt 3.2.0, ssot 3.11.0, golden-config 2.6.0, and others) includes:
 
 * [Nautobot Data Validation Engine](https://docs.nautobot.com/projects/data-validation/en/latest/)
 * [Nautobot Device Lifecycle Management](https://docs.nautobot.com/projects/device-lifecycle/en/latest/)
 * [Nautobot Device Onboarding](https://docs.nautobot.com/projects/device-onboarding/en/latest/)
 * [Nautobot Firewall Models](https://docs.nautobot.com/projects/firewall-models/en/latest/)
 * [Nautobot Golden Configuration](https://docs.nautobot.com/projects/golden-config/en/latest/)
-* [Nautobot Plugin Nornir](https://docs.nautobot.com/projects/nornir-nautobot/en/latest/)
+* [Nautobot Plugin Nornir](https://docs.nautobot.com/projects/plugin-nornir/en/latest/)
 * [Nautobot Single Source of Truth (SSoT)](https://docs.nautobot.com/projects/ssot/en/latest/)
 * [Nautobot Floorplan](https://docs.nautobot.com/projects/floor-plan/en/latest/)
 * [Nautobot BGP models](https://docs.nautobot.com/projects/bgp-models/en/latest/)
 * [Nautobot Secrets Provider](https://docs.nautobot.com/projects/secrets-providers/en/latest/)
 * [Nautobot Design Builder](https://docs.nautobot.com/projects/design-builder/en/latest/)
+* [nautobot-ui-plugin](https://pypi.org/project/nautobot-ui-plugin/) (2.x line; community package, see PyPI / project repo for usage)
+
+**Nautobot 3.x** (example pins: plugin-nornir 3.2.0, device-lifecycle-mgmt 4.1.1, ssot 4.2.2, golden-config 3.0.5, chatops 4.0.0 with Slack/Teams/Webex/Ansible/Arista extras, and others) includes the same families where a 3.x release exists, with these differences:
+
+* **[Nautobot ChatOps](https://docs.nautobot.com/projects/chatops/en/latest/)** is bundled again on **3.x** (it was dropped from 1.x/2.x images in this stack because of dependency clashes).
+* **Data Validation Engine** is **not** in the 3.x image today—the upstream package still targets Nautobot &lt; 3.0.
+* **UI Plugin** is **not** installed on 3.x (commented out in `requirements-3.x.txt`).
 
 Read more about the apps on [nautobot_the_ultimate_network_cmdb](/nautobot_the_ultimate_network_cmdb/)
 
 ## 🛠️ How to Use
-1. **Pull the image from Docker Hub:**
+1. **Pull the image from Docker Hub** (tags combine Nautobot version and Python, e.g. `3.1.0-py3.12`; floating **3.1-py3.12** is published for the highest Python in that minor series):
+
    ```bash
-   docker pull bsmeding/nautobot:2.x-latest  # or 1.x-latest for Nautobot 1.x
+   docker pull bsmeding/nautobot:3.1.0-py3.12   # Nautobot 3.1, Python 3.12
+   docker pull bsmeding/nautobot:2.4.31-py3.12  # Nautobot 2.4 LTS line
+   docker pull bsmeding/nautobot:1.6.32-py3.11  # Nautobot 1.6
+   docker pull bsmeding/nautobot:stable-py3.12   # tracks upstream; app set = 2.x requirements today
    ```
 2. **Use the provided Docker Compose file:**
 ```yaml
@@ -57,7 +72,7 @@ Read more about the apps on [nautobot_the_ultimate_network_cmdb](/nautobot_the_u
 services:
   nautobot:
     container_name: nautobot
-    image: &shared_image bsmeding/nautobot:stable-py3.11
+    image: &shared_image bsmeding/nautobot:3.1.0-py3.12
     depends_on:
       - postgres
       - redis
@@ -103,7 +118,7 @@ services:
     command: ["nautobot-server", "runserver", "0.0.0.0:8080"]
 
   postgres:
-    image: postgres:13-alpine
+    image: postgres:14-alpine
     container_name: postgres
     command:
       - "-c"
@@ -188,10 +203,10 @@ volumes:
   postgres_data: {}
   redis_data: {}
 ```
-   - Source: [docker-compose.yml Gist](https://gist.github.com/bsmeding/d60cf4f23519c75ca2339148d6efd7fe)
+   - Source: [docker-compose.yml Gist](https://gist.github.com/bsmeding/d60cf4f23519c75ca2339148d6efd7fe) (adjust `image` to your desired Nautobot major, e.g. `3.0.6-py3.12` or `stable-py3.12`).
    - This Compose file sets up Nautobot, Postgres, Redis, and volumes for persistent data.
 3. **Configure your plugins/apps:**
-   - Edit `nautobot_config.py` to activate the plugins you want. All are pre-installed, just enable them in the config.
+   - Edit `nautobot_config.py` to activate the plugins you want. Everything listed for your image’s major version is pre-installed; enable only what you need.
    - Example:
      ```python
      PLUGINS = [
@@ -206,8 +221,11 @@ volumes:
    ```
 
 ## 🔍 Requirements Files
-- For Nautobot 1.x: see `requirements_1.x.txt` in the [GitHub repo](https://github.com/bsmeding/nautobot-docker)
-- For Nautobot 2.x: see `requirements2.x.txt` in the [GitHub repo](https://github.com/bsmeding/nautobot-docker)
+- **1.x:** [`requirements-1.x.txt`](https://github.com/bsmeding/docker_container_nautobot/blob/main/requirements-1.x.txt)
+- **2.x** (also used when `NAUTOBOT_VER` is `stable` or `latest` in the Dockerfile): [`requirements-2.x.txt`](https://github.com/bsmeding/docker_container_nautobot/blob/main/requirements-2.x.txt)
+- **3.x:** [`requirements-3.x.txt`](https://github.com/bsmeding/docker_container_nautobot/blob/main/requirements-3.x.txt)
+
+Local builds use [`build.sh`](https://github.com/bsmeding/docker_container_nautobot/blob/main/build.sh) or the Makefile (`make build VERSION=3.1.0`, and so on).
 
 ## 📝 Why Use These Images?
 - **Save time:** No need to build or install plugins manually.
@@ -219,8 +237,8 @@ volumes:
 - [Nautobot Apps Documentation](https://docs.nautobot.com/projects/core/en/stable/apps/)
 - [Docker Compose Example](https://gist.github.com/bsmeding/d60cf4f23519c75ca2339148d6efd7fe)
 - [Docker Hub: bsmeding/nautobot](https://hub.docker.com/repository/docker/bsmeding/nautobot)
-- [GitHub: bsmeding/nautobot-docker](https://github.com/bsmeding/nautobot-docker)
+- [GitHub: docker_container_nautobot](https://github.com/bsmeding/docker_container_nautobot) (Dockerfile, CI matrix, pinned apps)
 
 ---
 
-If you have questions or want to suggest more apps to include, feel free to open an issue or contact me via the links above! 
+If you have questions or want to suggest more apps to include, feel free to open an issue or contact me via the links above!
