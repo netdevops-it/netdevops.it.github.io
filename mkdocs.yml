@@ -26,6 +26,11 @@ nav:
     - 'Nautobot the ultimate network CMDB': nautobot_the_ultimate_network_cmdb.md
     - 'Nautobot Docker Apps': blog/posts/2025/2025-04-10-nautobot-docker-apps.md
     - 'Import Device Types into Nautobot': blog/posts/2025/2025-09-16-import-device-types-into-nautobot.md
+    - 'Nautobot Digital Twin':
+      - 'User Guide': projects/nautobot-digital-twin/user-guide.md
+      - 'Admin Guide': projects/nautobot-digital-twin/admin-guide.md
+      - 'Developer Guide': projects/nautobot-digital-twin/developer-guide.md
+      - 'Release Notes': projects/nautobot-digital-twin/release-notes.md
     # - 'Nautobot Zero to Hero':
     #   - 'Overview': tutorials/nautobot_zero_to_hero/00_nautobot-zero-to-hero-landings-page.md
     #   - 'Part 1: Install Nautobot in 5 minutes': tutorials/nautobot_zero_to_hero/01_nautobot-zero-to-hero-part1.md
