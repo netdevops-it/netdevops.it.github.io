@@ -1,0 +1,81 @@
+/* Layout */
+.rat.wrap {
+    margin-top: 0.75rem;
+  }
+  .rat.actions {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: 1rem;
+  }
+  .rat.sep {
+    opacity: .7;
+  }
+  
+  /* Cards that match Material look */
+  .rat.card {
+    background: var(--md-default-bg-color);
+    color: var(--md-default-fg-color);
+    border: 1px solid var(--md-default-fg-color--lighter, rgba(0,0,0,.08));
+    border-radius: .6rem;
+    padding: 1rem;
+    box-shadow: var(--md-shadow-z1);
+  }
+  .rat.grid {
+    display: grid;
+    grid-template-columns: 320px minmax(280px, 1fr);
+    gap: 1rem;
+  }
+  @media (max-width: 960px) {
+    .rat.grid { grid-template-columns: 1fr; }
+  }
+  
+  /* Names list / textarea */
+  .rat.names {
+    max-height: 60vh;
+    overflow: auto;
+  }
+  .rat.names label {
+    display: block;
+    padding: .25rem 0;
+  }
+  .rat.names textarea {
+    width: 100%;
+    min-height: 12rem;
+  }
+  
+  /* Wheel area */
+  .rat.wheelbox {
+    position: relative;
+    display: inline-block;
+    margin-top: .75rem;
+  }
+  .rat.pointer {
+    position: absolute;
+    top: -26px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 28px solid var(--md-accent-fg-color, #ff5252);
+    z-index: 2;
+  }
+  #wheelCanvas {
+    max-width: min(90vw, 520px);
+    height: auto;
+  }
+  
+  /* Result */
+  .rat.result {
+    margin-top: .75rem;
+    font-size: 1.15rem;
+    color: var(--md-success-fg-color, #2e7d32);
+  }
+  
+  /* Wheel card center */
+  .wheel-card {
+    text-align: center;
+  }
+  

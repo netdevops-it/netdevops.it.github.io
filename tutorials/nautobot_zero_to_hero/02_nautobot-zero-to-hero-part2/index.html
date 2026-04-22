@@ -1,0 +1,2098 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Network & Infra Automation – Tutorials • Blog • Courses">
+      
+      
+        <meta name="author" content="Bart Smeding">
+      
+      
+        <link rel="canonical" href="https://netdevops.it/tutorials/nautobot_zero_to_hero/02_nautobot-zero-to-hero-part2/">
+      
+      
+      
+      
+        
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>02 nautobot zero to hero part2 - NetDevOps.it</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css">
+    
+      <link rel="stylesheet" href="../../../css/full-width.css">
+    
+      <link rel="stylesheet" href="../../../css/rat.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-LF84C44PGC"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-LF84C44PGC",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-LF84C44PGC",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nautobot-zero-to-hero-part-2-getting-started-with-nautobot" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="NetDevOps.it" class="md-header__button md-logo" aria-label="NetDevOps.it" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NetDevOps.it
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              02 nautobot zero to hero part2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch theme"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch theme" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_2">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/bsmeding/bsmeding.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../nautobot_the_ultimate_network_cmdb/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Nautobot
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../blog/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Tutorials
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../tools/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Tools
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../online-dev-tools/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Web Tools
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Courses
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../privacy/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Privacy Policy
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="NetDevOps.it" class="md-nav__button md-logo" aria-label="NetDevOps.it" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    NetDevOps.it
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/bsmeding/bsmeding.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../nautobot_the_ultimate_network_cmdb/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nautobot
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../blog/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../tools/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../online-dev-tools/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Tools
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../courses/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Courses
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../privacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-can-nautobot-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Can Nautobot Do?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Index
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-understanding-nautobots-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Understanding Nautobot's Capabilities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Understanding Nautobot&#39;s Capabilities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-makes-nautobot-powerful" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Makes Nautobot Powerful
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-nautobot-globals-foundation-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Nautobot Globals - Foundation Data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Nautobot Globals - Foundation Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-tenant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Tenant
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-location-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Location Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-locations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Locations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-manufacturers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Manufacturers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-device-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 Device Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-platforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 Platforms
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#47-tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.7 Tags
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#48-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.8 Roles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#49-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.9 Status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#410-ipam-ip-address-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.10 IPAM (IP Address Management)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.10 IPAM (IP Address Management)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#containers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Containers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prefixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vlans" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VLANs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-access-jobs-from-the-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Access Jobs from the Repository
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Access Jobs from the Repository">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-add-the-repository-to-nautobot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Add the Repository to Nautobot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-verify-jobs-are-available" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Verify Jobs are Available
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-run-the-pre-flight-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Run the Pre-Flight Job
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Run the Pre-Flight Job">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-locate-the-pre-flight-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Locate the Pre-Flight Job
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-run-the-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Run the Job
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-review-job-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Review Job Results
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-verify-demo-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Verify Demo Environment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Verify Demo Environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-check-location-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Check Location Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-check-region" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Check Region
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-check-site" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Check Site
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-check-manufacturers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Check Manufacturers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-check-device-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 Check Device Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76-check-platforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6 Check Platforms
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#77-check-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.7 Check Roles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#78-check-device" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.8 Check Device
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-wrap-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Wrap-Up
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<hr />
+<p>authors: [bsmeding]
+title: Nautobot Zero to Hero – Part 2: Getting Started with Nautobot
+tags: ["network automation", "nautobot", "jobs", "demo environment"]
+toc: true
+layout: single
+comments: true
+draft: true</p>
+<hr />
+<h1 id="nautobot-zero-to-hero-part-2-getting-started-with-nautobot">Nautobot Zero to Hero – Part 2: Getting Started with Nautobot</h1>
+<h2 id="what-can-nautobot-do">What Can Nautobot Do?</h2>
+<p><em>Explore Nautobot's capabilities and deploy a demo environment using Jobs.</em></p>
+<!-- more -->
+
+<hr />
+<h2 id="index">Index</h2>
+<ul>
+<li><a href="#nautobot-zero-to-hero--part-2-getting-started-with-nautobot">Nautobot Zero to Hero – Part 2: Getting Started with Nautobot</a></li>
+<li><a href="#what-can-nautobot-do">What Can Nautobot Do?</a></li>
+<li><a href="#index">Index</a></li>
+<li><a href="#1-introduction">1. Introduction</a></li>
+<li><a href="#2-prerequisites">2. Prerequisites</a></li>
+<li><a href="#3-understanding-nautobots-capabilities">3. Understanding Nautobot's Capabilities</a></li>
+<li><a href="#4-nautobot-globals---foundation-data">4. Nautobot Globals - Foundation Data</a><ul>
+<li><a href="#41-tenant">4.1 Tenant</a></li>
+<li><a href="#42-location-types">4.2 Location Types</a></li>
+<li><a href="#43-locations">4.3 Locations</a></li>
+<li><a href="#44-manufacturers">4.4 Manufacturers</a></li>
+<li><a href="#45-device-types">4.5 Device Types</a></li>
+<li><a href="#46-platforms">4.6 Platforms</a></li>
+<li><a href="#47-tags">4.7 Tags</a></li>
+<li><a href="#48-roles">4.8 Roles</a></li>
+<li><a href="#49-status">4.9 Status</a></li>
+<li><a href="#410-ipam-ip-address-management">4.10 IPAM (IP Address Management)</a></li>
+</ul>
+</li>
+<li><a href="#5-access-jobs-from-the-repository">5. Access Jobs from the Repository</a></li>
+<li><a href="#6-run-the-pre-flight-job">6. Run the Pre-Flight Job</a></li>
+<li><a href="#7-verify-demo-environment">7. Verify Demo Environment</a></li>
+<li><a href="#8-wrap-up">8. Wrap-Up</a></li>
+<li><a href="#9-next-steps">9. Next Steps</a></li>
+</ul>
+<hr />
+<h2 id="1-introduction">1. Introduction</h2>
+<p>In this part, we'll explore what Nautobot can do and use Jobs from the <a href="https://github.com/bsmeding/nautobot_zero_to_hero">nautobot_zero_to_hero</a> repository to quickly set up a demo environment. We'll run the pre-flight job that automatically creates a region, site, and device to get you started.</p>
+<p>We'll:</p>
+<ol>
+<li>Understand Nautobot's core capabilities</li>
+<li>Learn about Nautobot Globals - the foundation data needed before adding sites and devices</li>
+<li>Access Jobs from the repository</li>
+<li>Run the pre-flight job to create initial data</li>
+<li>Verify the demo environment is set up correctly</li>
+</ol>
+<blockquote>
+<p><strong>Estimated Time:</strong> ~1 hour</p>
+</blockquote>
+<hr />
+<h2 id="2-prerequisites">2. Prerequisites</h2>
+<ul>
+<li>Completed <a href="/tutorials/nautobot_zero_to_hero/02_nautobot-zero-to-hero-part1/">Part 1: Install Nautobot</a></li>
+<li>Nautobot is running and accessible</li>
+<li>Access to the nautobot_zero_to_hero repository</li>
+</ul>
+<hr />
+<h2 id="3-understanding-nautobots-capabilities">3. Understanding Nautobot's Capabilities</h2>
+<p>Nautobot is a Network Source of Truth (SSoT) platform that provides:</p>
+<h3 id="core-features"><strong>Core Features</strong></h3>
+<ul>
+<li><strong>Device Inventory Management</strong>: Track all network devices, their locations, and relationships</li>
+<li><strong>IP Address Management (IPAM)</strong>: Manage IP addresses, prefixes, and VLANs</li>
+<li><strong>Cable Management</strong>: Document physical and logical connections</li>
+<li><strong>Configuration Management</strong>: Store and version control device configurations</li>
+<li><strong>Jobs Framework</strong>: Run custom Python scripts for automation tasks</li>
+<li><strong>REST and GraphQL APIs</strong>: Integrate with other tools and systems</li>
+<li><strong>Plugin Ecosystem</strong>: Extend functionality with plugins</li>
+</ul>
+<h3 id="what-makes-nautobot-powerful"><strong>What Makes Nautobot Powerful</strong></h3>
+<ul>
+<li><strong>Single Source of Truth</strong>: One place for all network data</li>
+<li><strong>Git Integration</strong>: Version control for configurations and templates</li>
+<li><strong>Extensibility</strong>: Custom Jobs, plugins, and integrations</li>
+<li><strong>API-First Design</strong>: Programmatic access to all data</li>
+<li><strong>Webhooks</strong>: Event-driven automation</li>
+</ul>
+<hr />
+<h2 id="4-nautobot-globals-foundation-data">4. Nautobot Globals - Foundation Data</h2>
+<p>Before you can add sites and devices to Nautobot, you need to set up the foundational data structures, also known as "Globals." These are the building blocks that define how your network is organized and categorized. Understanding these concepts is crucial for effectively using Nautobot.</p>
+<blockquote>
+<p><strong>💡 Tip:</strong> The pre-flight job from the nautobot_zero_to_hero repository will create many of these automatically. However, understanding what they are and how they work will help you customize and extend your Nautobot instance.</p>
+</blockquote>
+<h3 id="41-tenant">4.1 Tenant</h3>
+<p><strong>Tenants</strong> represent organizations or departments that own or use network resources. They provide logical separation and can be used for multi-tenancy scenarios.</p>
+<p><strong>Use Cases:</strong>
+- Separate network resources by business unit
+- Track ownership of devices and IP addresses
+- Apply tenant-specific policies and access controls</p>
+<p><strong>Navigation:</strong> Organization → Tenants</p>
+<p><strong>Example:</strong>
+- Create a tenant named "Engineering" for the engineering department
+- Create a tenant named "Sales" for the sales department</p>
+<hr />
+<h3 id="42-location-types">4.2 Location Types</h3>
+<p><strong>Location Types</strong> define the hierarchy of physical locations in your network. They create a tree structure that represents your organizational geography.</p>
+<p><strong>Common Location Types:</strong>
+- <strong>Country</strong>: Top-level geographic location
+- <strong>Region</strong>: Large geographic area (e.g., "North America", "Europe")
+- <strong>Site</strong>: Physical location where network equipment resides (e.g., data center, office building)
+- <strong>Room</strong>: Specific room within a site (e.g., "Server Room A", "Network Closet")
+- <strong>Floor</strong>: Floor level within a building</p>
+<p><strong>Navigation:</strong> Organization → Location Types</p>
+<p><strong>Example Setup:</strong></p>
+<ol>
+<li><strong>Add Location Type: Country</strong></li>
+<li>Navigate to <strong>Organization → Location Types</strong></li>
+<li>Click <strong>Add</strong></li>
+<li>Name: <code>Country</code></li>
+<li>Description: <code>Top-level geographic location</code></li>
+<li>
+<p>Click <strong>Create</strong></p>
+</li>
+<li>
+<p><strong>Add Location Type: Region</strong></p>
+</li>
+<li>Name: <code>Region</code></li>
+<li>Description: <code>Large geographic area within a country</code></li>
+<li>Parent: <code>Country</code> (optional, but recommended for hierarchy)</li>
+<li>
+<p>Click <strong>Create</strong></p>
+</li>
+<li>
+<p><strong>Add Location Type: Site</strong></p>
+</li>
+<li>Name: <code>Site</code></li>
+<li>Description: <code>Physical location with network equipment</code></li>
+<li>Parent: <code>Region</code></li>
+<li><strong>Allowed Items</strong>: Enable checkboxes for items that can exist at this level:<ul>
+<li>✅ Devices</li>
+<li>✅ Racks</li>
+<li>✅ Power panels</li>
+<li>✅ Circuits</li>
+<li>✅ Prefixes</li>
+<li>✅ VLANs</li>
+</ul>
+</li>
+<li>Click <strong>Create</strong></li>
+</ol>
+<p>📸 <strong>[Screenshot: Location Type Configuration with Allowed Items]</strong></p>
+<p><strong>Why Location Types Matter:</strong>
+- They enforce a logical hierarchy for your network locations
+- They control what types of objects can be placed at each level
+- They enable better organization and filtering of network resources</p>
+<hr />
+<h3 id="43-locations">4.3 Locations</h3>
+<p><strong>Locations</strong> are the actual instances of location types. They represent real places in your network hierarchy.</p>
+<p><strong>Navigation:</strong> Organization → Locations</p>
+<p><strong>Example:</strong>
+- Create a location of type "Country" named "United States"
+- Create a location of type "Region" named "West Coast" under "United States"
+- Create a location of type "Site" named "San Francisco Data Center" under "West Coast"</p>
+<p>📸 <strong>[Screenshot: Location Hierarchy Tree]</strong></p>
+<hr />
+<h3 id="44-manufacturers">4.4 Manufacturers</h3>
+<p><strong>Manufacturers</strong> represent the companies that produce network equipment (e.g., Cisco, Arista, Juniper).</p>
+<p><strong>Navigation:</strong> Devices → Manufacturers</p>
+<p><strong>Why It's Important:</strong>
+- Device types are associated with manufacturers
+- Helps organize and filter devices by vendor
+- Required before creating device types</p>
+<p><strong>Example:</strong>
+- Create manufacturer: <code>Cisco</code>
+- Create manufacturer: <code>Arista</code>
+- Create manufacturer: <code>Juniper</code></p>
+<hr />
+<h3 id="45-device-types">4.5 Device Types</h3>
+<p><strong>Device Types</strong> define the model and specifications of network devices. They include information about:
+- Physical dimensions (height in rack units)
+- Interfaces and their types
+- Power consumption
+- Console ports
+- Management interfaces</p>
+<p><strong>Navigation:</strong> Devices → Device Types</p>
+<p><strong>Why It's Important:</strong>
+- Every device in Nautobot must have a device type
+- Device types define what interfaces and components a device has
+- They enable proper inventory tracking and automation</p>
+<p><strong>💡 Using the Device Type Library:</strong></p>
+<p>Instead of manually creating device types, you can use the <a href="https://github.com/bsmeding/nautobot_devicetype_library">nautobot_devicetype_library</a> repository, which contains thousands of pre-defined device types for various manufacturers.</p>
+<p><strong>To use the device type library:</strong></p>
+<ol>
+<li><strong>Add the Repository to Nautobot:</strong></li>
+<li>Navigate to <strong>Apps → Git Repositories</strong></li>
+<li>Click <strong>Add</strong></li>
+<li>Configure:<ul>
+<li><strong>Name:</strong> <code>nautobot_devicetype_library</code></li>
+<li><strong>Source URL:</strong> <code>https://github.com/bsmeding/nautobot_devicetype_library.git</code></li>
+<li><strong>Branch:</strong> <code>main</code></li>
+<li>Enable <strong>Jobs</strong> checkbox</li>
+</ul>
+</li>
+<li>
+<p>Click <strong>Save and Sync Now</strong></p>
+</li>
+<li>
+<p><strong>Enable the Device Type Import Job:</strong></p>
+</li>
+<li>Navigate to <strong>Jobs → Jobs</strong></li>
+<li>Find the job: <code>Device Type Import</code> or <code>Import Device Types</code></li>
+<li>
+<p>Click on the job to view details</p>
+</li>
+<li>
+<p><strong>Run the Job:</strong></p>
+</li>
+<li>Click <strong>Run Job</strong></li>
+<li>The job will sync device types from the repository</li>
+<li>This may take a few minutes depending on the number of device types</li>
+</ol>
+<p>📸 <strong>[Screenshot: Device Type Import Job]</strong></p>
+<p><strong>Benefits:</strong>
+- Thousands of device types ready to use
+- No manual data entry required
+- Regularly updated with new device models
+- Includes interface definitions and specifications</p>
+<hr />
+<h3 id="46-platforms">4.6 Platforms</h3>
+<p><strong>Platforms</strong> define the operating system and software running on devices. They link device types to automation drivers and capabilities.</p>
+<p><strong>Navigation:</strong> Devices → Platforms</p>
+<p><strong>Key Components:</strong></p>
+<ol>
+<li><strong>Network Driver</strong>: Specifies which Python library to use for device communication</li>
+<li>Examples: <code>netmiko</code>, <code>napalm</code>, <code>scrapli</code></li>
+<li>
+<p>Used for SSH/Telnet connections</p>
+</li>
+<li>
+<p><strong>NAPALM Driver</strong>: If using NAPALM for device automation</p>
+</li>
+<li>Examples: <code>ios</code>, <code>eos</code>, <code>junos</code>, <code>nxos</code></li>
+<li>Enables configuration management and data collection</li>
+</ol>
+<p><strong>Example Platform Configuration:</strong>
+- <strong>Name:</strong> <code>Cisco IOS</code>
+- <strong>Manufacturer:</strong> <code>Cisco</code>
+- <strong>Network Driver:</strong> <code>netmiko</code>
+- <strong>NAPALM Driver:</strong> <code>ios</code>
+- <strong>Description:</strong> <code>Cisco IOS platform for routers and switches</code></p>
+<p>📸 <strong>[Screenshot: Platform Configuration with Drivers]</strong></p>
+<p><strong>Why Platforms Matter:</strong>
+- They enable automation tools to connect to devices
+- They determine which drivers and libraries are used
+- They link device types to automation capabilities</p>
+<hr />
+<h3 id="47-tags">4.7 Tags</h3>
+<p><strong>Tags</strong> are flexible labels that can be applied to any object in Nautobot. They enable flexible categorization and filtering.</p>
+<p><strong>Navigation:</strong> Extensibility → Tags</p>
+<p><strong>Use Cases:</strong>
+- Mark devices as "production" or "lab"
+- Tag IP addresses as "DMZ" or "internal"
+- Label circuits as "critical" or "redundant"
+- Filter and search across different object types</p>
+<p><strong>Example Tags:</strong>
+- <code>production</code>
+- <code>lab</code>
+- <code>critical</code>
+- <code>redundant</code>
+- <code>dmz</code>
+- <code>internal</code></p>
+<p>📸 <strong>[Screenshot: Tags List]</strong></p>
+<hr />
+<h3 id="48-roles">4.8 Roles</h3>
+<p><strong>Roles</strong> define the function or purpose of network objects. They provide semantic meaning to devices, IP addresses, VLANs, and other objects.</p>
+<p><strong>Navigation:</strong> Organization → Roles</p>
+<p><strong>Common Device Roles:</strong>
+- <code>core-router</code>
+- <code>distribution-switch</code>
+- <code>access-switch</code>
+- <code>firewall</code>
+- <code>load-balancer</code>
+- <code>wireless-controller</code></p>
+<p><strong>Common IP Address Roles:</strong>
+- <code>loopback</code>
+- <code>management</code>
+- <code>point-to-point</code>
+- <code>anycast</code></p>
+<p><strong>Why Roles Matter:</strong>
+- They provide semantic meaning to network objects
+- They enable filtering and searching by function
+- They help organize and understand network topology</p>
+<hr />
+<h3 id="49-status">4.9 Status</h3>
+<p><strong>Status</strong> represents the operational state of objects in Nautobot. Every object has a status that indicates whether it's active, planned, decommissioned, etc.</p>
+<p><strong>Navigation:</strong> Extensibility → Statuses</p>
+<p><strong>Common Statuses:</strong>
+- <code>Active</code>: Object is currently in use
+- <code>Planned</code>: Object is planned but not yet deployed
+- <code>Staged</code>: Object is staged for deployment
+- <code>Decommissioning</code>: Object is being removed
+- <code>Offline</code>: Object is temporarily offline
+- <code>Failed</code>: Object has failed</p>
+<p><strong>Why Status Matters:</strong>
+- Tracks the lifecycle of network objects
+- Enables filtering by operational state
+- Helps with capacity planning and inventory management</p>
+<hr />
+<h3 id="410-ipam-ip-address-management">4.10 IPAM (IP Address Management)</h3>
+<p>IPAM components are essential for managing network addressing:</p>
+<h4 id="containers"><strong>Containers</strong></h4>
+<p><strong>Containers</strong> are large IP address blocks (typically /8, /16, or /12) that contain smaller prefixes.</p>
+<p><strong>Navigation:</strong> IPAM → Prefixes → Add Container</p>
+<p><strong>Example:</strong>
+- Container: <code>10.0.0.0/8</code> (private RFC 1918 space)
+- Container: <code>172.16.0.0/12</code> (private RFC 1918 space)</p>
+<h4 id="prefixes"><strong>Prefixes</strong></h4>
+<p><strong>Prefixes</strong> are IP address ranges (subnets) that can contain other prefixes or individual IP addresses.</p>
+<p><strong>Navigation:</strong> IPAM → Prefixes</p>
+<p><strong>Example:</strong>
+- Prefix: <code>10.1.0.0/16</code> (under container <code>10.0.0.0/8</code>)
+- Prefix: <code>10.1.1.0/24</code> (under prefix <code>10.1.0.0/16</code>)</p>
+<p><strong>Use Cases:</strong>
+- Organize IP address space hierarchically
+- Track subnet utilization
+- Assign prefixes to sites or tenants</p>
+<h4 id="vlans"><strong>VLANs</strong></h4>
+<p><strong>VLANs</strong> represent virtual LANs in your network. They can be associated with sites and prefixes.</p>
+<p><strong>Navigation:</strong> IPAM → VLANs</p>
+<p><strong>Example:</strong>
+- VLAN ID: <code>100</code>
+- Name: <code>Production</code>
+- Site: <code>San Francisco Data Center</code>
+- Prefix: <code>10.1.1.0/24</code></p>
+<p>📸 <strong>[Screenshot: VLAN Configuration]</strong></p>
+<p><strong>Why IPAM Matters:</strong>
+- Centralized IP address management
+- Prevents IP address conflicts
+- Tracks utilization and availability
+- Links addressing to network topology</p>
+<hr />
+<h2 id="5-access-jobs-from-the-repository">5. Access Jobs from the Repository</h2>
+<p>The <a href="https://github.com/bsmeding/nautobot_zero_to_hero">nautobot_zero_to_hero</a> repository contains pre-built Jobs that help you get started quickly. These Jobs will automatically create the foundation data (Globals) we discussed in the previous section, saving you time and ensuring consistency.</p>
+<p><strong>The Pre-flight Lab Setup Job</strong> in this repository will create:
+- Location type hierarchy (Region, Site, Building, Floor, Room)
+- A region named "NetDevOps"
+- A site named "netdevops.it_lab"
+- Manufacturers (Cisco, Arista, Juniper, Nokia)
+- Device types for common network devices
+- Platforms with proper driver mappings (network driver and NAPALM driver)
+- Roles (core-router, distribution-switch, access-switch, etc.)
+- Tags and statuses
+- Management subnet (172.20.20.0/24) with prefixes
+- VLANs for the lab environment
+- Sample devices matching the Containerlab topology</p>
+<p>Let's set up Jobs in Nautobot:</p>
+<h3 id="51-add-the-repository-to-nautobot">5.1 Add the Repository to Nautobot</h3>
+<ol>
+<li>In Nautobot, navigate to <strong>Apps → Git Repositories</strong></li>
+<li>Click <strong>Add</strong> to create a new repository</li>
+<li>Configure the repository:</li>
+<li><strong>Name:</strong> <code>nautobot_zero_to_hero</code></li>
+<li><strong>Source URL:</strong> <code>https://github.com/bsmeding/nautobot_zero_to_hero.git</code></li>
+<li><strong>Branch:</strong> <code>main</code></li>
+<li><strong>Secrets Group:</strong> (leave empty for public repo)</li>
+<li>Enable <strong>Jobs</strong> checkbox</li>
+<li>Click <strong>Save and Sync Now</strong></li>
+</ol>
+<p>📸 <strong>[Screenshot: Git Repository Configuration]</strong></p>
+<p>After syncing, the Jobs from the repository will be available in Nautobot.</p>
+<h3 id="52-verify-jobs-are-available">5.2 Verify Jobs are Available</h3>
+<ol>
+<li>Navigate to <strong>Jobs → Jobs</strong></li>
+<li>You should see Jobs from the repository, including the pre-flight job</li>
+</ol>
+<p>📸 <strong>[Screenshot: Available Jobs List]</strong></p>
+<hr />
+<h2 id="6-run-the-pre-flight-job">6. Run the Pre-Flight Job</h2>
+<p>The <strong>pre-flight job</strong> from the nautobot_zero_to_hero repository will automatically create a complete demo environment, including all the foundation data (Globals) we discussed earlier. This job will:</p>
+<ul>
+<li>Create location types (if needed)</li>
+<li>Create a region</li>
+<li>Create a site</li>
+<li>Create manufacturers</li>
+<li>Create device types</li>
+<li>Create platforms with proper driver mappings</li>
+<li>Create roles and statuses</li>
+<li>Create a device with proper platform and role</li>
+</ul>
+<p>This is much faster than manually creating all these objects!</p>
+<h3 id="61-locate-the-pre-flight-job">6.1 Locate the Pre-Flight Job</h3>
+<ol>
+<li>Navigate to <strong>Jobs → Jobs</strong></li>
+<li>Find the job named <strong>"Pre-flight Lab Setup"</strong> (under the "LAB Setup" category)</li>
+<li>Click on the job name to open it</li>
+</ol>
+<p>📸 <strong>[Screenshot: Pre-Flight Job Details]</strong></p>
+<h3 id="62-run-the-job">6.2 Run the Job</h3>
+<ol>
+<li>Click <strong>Run Job</strong> button</li>
+<li>Review the job parameters (if any)</li>
+<li>Click <strong>Run Job</strong> to execute</li>
+</ol>
+<p>📸 <strong>[Screenshot: Running the Pre-Flight Job]</strong></p>
+<p>The job will run and create all the necessary foundation data. This may take a minute or two.</p>
+<h3 id="63-review-job-results">6.3 Review Job Results</h3>
+<p>After the job completes:
+1. View the job result to see what was created
+2. Check the logs for any warnings or errors
+3. Verify the output shows successful creation of:
+   - Location types
+   - Region
+   - Site
+   - Manufacturers
+   - Device types
+   - Platforms
+   - Roles
+   - Device</p>
+<p>📸 <strong>[Screenshot: Job Result Output]</strong></p>
+<hr />
+<h2 id="7-verify-demo-environment">7. Verify Demo Environment</h2>
+<p>Let's verify that the pre-flight job created all the expected foundation data:</p>
+<h3 id="71-check-location-types">7.1 Check Location Types</h3>
+<ol>
+<li>Navigate to <strong>Organization → Location Types</strong></li>
+<li>You should see location types created by the job (e.g., Region, Site)</li>
+</ol>
+<p>📸 <strong>[Screenshot: Location Types List]</strong></p>
+<h3 id="72-check-region">7.2 Check Region</h3>
+<ol>
+<li>Navigate to <strong>Organization → Regions</strong></li>
+<li>You should see a region created by the job</li>
+</ol>
+<p>📸 <strong>[Screenshot: Regions List]</strong></p>
+<h3 id="73-check-site">7.3 Check Site</h3>
+<ol>
+<li>Navigate to <strong>Organization → Sites</strong></li>
+<li>You should see a site created by the job</li>
+<li>Click on the site to view its details and verify it's associated with the region</li>
+</ol>
+<p>📸 <strong>[Screenshot: Sites List]</strong>
+📸 <strong>[Screenshot: Site Details]</strong></p>
+<h3 id="74-check-manufacturers">7.4 Check Manufacturers</h3>
+<ol>
+<li>Navigate to <strong>Devices → Manufacturers</strong></li>
+<li>You should see manufacturers created by the job (e.g., Cisco, Arista)</li>
+</ol>
+<p>📸 <strong>[Screenshot: Manufacturers List]</strong></p>
+<h3 id="75-check-device-types">7.5 Check Device Types</h3>
+<ol>
+<li>Navigate to <strong>Devices → Device Types</strong></li>
+<li>You should see device types created by the job</li>
+</ol>
+<p>📸 <strong>[Screenshot: Device Types List]</strong></p>
+<h3 id="76-check-platforms">7.6 Check Platforms</h3>
+<ol>
+<li>Navigate to <strong>Devices → Platforms</strong></li>
+<li>You should see platforms created by the job with proper driver mappings</li>
+<li>Click on a platform to verify network driver and NAPALM driver settings</li>
+</ol>
+<p>📸 <strong>[Screenshot: Platforms List]</strong>
+📸 <strong>[Screenshot: Platform Details with Drivers]</strong></p>
+<h3 id="77-check-roles">7.7 Check Roles</h3>
+<ol>
+<li>Navigate to <strong>Organization → Roles</strong></li>
+<li>You should see roles created by the job (e.g., core-router, access-switch)</li>
+</ol>
+<p>📸 <strong>[Screenshot: Roles List]</strong></p>
+<h3 id="78-check-device">7.8 Check Device</h3>
+<ol>
+<li>Navigate to <strong>Devices → Devices</strong></li>
+<li>You should see a device created by the job</li>
+<li>Click on the device to view its details:</li>
+<li>Verify it has a device type</li>
+<li>Verify it has a platform</li>
+<li>Verify it has a role</li>
+<li>Verify it's assigned to the site</li>
+</ol>
+<p>📸 <strong>[Screenshot: Devices List]</strong>
+📸 <strong>[Screenshot: Device Details]</strong></p>
+<hr />
+<h2 id="8-wrap-up">8. Wrap-Up</h2>
+<p>Congratulations! You have successfully:
+- ✅ Explored Nautobot's core capabilities
+- ✅ Learned about Nautobot Globals - the foundation data structures
+- ✅ Understood the importance of location types, manufacturers, device types, platforms, roles, and statuses
+- ✅ Added the nautobot_zero_to_hero repository to Nautobot
+- ✅ Synced Jobs from the repository
+- ✅ Run the pre-flight job to create initial data
+- ✅ Verified the demo environment is set up with all foundation data</p>
+<p>You now have a working Nautobot instance with:
+- Complete foundation data (Globals) ready for use
+- A region and site structure
+- Manufacturers, device types, and platforms configured
+- A demo device ready for further configuration
+- Understanding of how Nautobot organizes network data</p>
+<p>This foundation will support all future network automation tasks in the series.</p>
+<hr />
+<h2 id="9-next-steps">9. Next Steps</h2>
+<p>Now that you have Nautobot set up with initial data, proceed to <strong>Part 3: Deploy Network with Containerlab</strong> to:
+- Set up a containerlab network topology
+- Configure multi-vendor network devices
+- Prepare your lab environment for automation</p>
+<hr />
+<p><em>Happy automating! 🚀</em></p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 22, 2026 19:58:47 UTC">April 22, 2026</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/bartsmeding/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.top", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand", "navigation.sections", "navigation.indexes", "navigation.prune", "content.code.copy", "content.tabs.link", "search.share", "search.suggest"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../js/giscus.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
+      
+        <script src="../../../js/cookieconsent-init.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/zarocknz/javascript-winwheel@2.7.0/Winwheel.min.js"></script>
+      
+        <script src="../../../js/wheel.js"></script>
+      
+    
+  </body>
+</html>

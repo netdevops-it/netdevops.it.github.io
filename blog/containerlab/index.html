@@ -1,0 +1,2483 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Network & Infra Automation – Tutorials • Blog • Courses">
+      
+      
+        <meta name="author" content="Bart Smeding">
+      
+      
+        <link rel="canonical" href="https://netdevops.it/blog/containerlab/">
+      
+      
+        <link rel="prev" href="../opsmill/">
+      
+      
+        <link rel="next" href="../visual-studio-code-for-network-automation/">
+      
+      
+        
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>ContainerLab - NetDevOps.it</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css">
+    
+      <link rel="stylesheet" href="../../css/full-width.css">
+    
+      <link rel="stylesheet" href="../../css/rat.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-LF84C44PGC"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-LF84C44PGC",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-LF84C44PGC",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#containerlab" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="NetDevOps.it" class="md-header__button md-logo" aria-label="NetDevOps.it" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NetDevOps.it
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ContainerLab
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch theme"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch theme" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_2">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/bsmeding/bsmeding.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../nautobot_the_ultimate_network_cmdb/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Nautobot
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tutorials/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Tutorials
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tools/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Tools
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../online-dev-tools/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Web Tools
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Courses
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../privacy/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Privacy Policy
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="NetDevOps.it" class="md-nav__button md-logo" aria-label="NetDevOps.it" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    NetDevOps.it
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/bsmeding/bsmeding.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../nautobot_the_ultimate_network_cmdb/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nautobot
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Archive
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2025/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2024/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2024
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2023/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2023
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2022/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2022
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../tutorials/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../tools/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../online-dev-tools/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Tools
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../courses/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Courses
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../privacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-containerlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is ContainerLab?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation Guide
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-install-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Install Docker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-install-containerlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Install ContainerLab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-install-additional-tools-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Install Additional Tools (Optional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-docker-compose-installation-alternative-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Docker Compose Installation (Alternative Method)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-ansible-role-deployment-coming-soon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Ansible Role Deployment (Coming Soon)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started-with-free-vendor-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started with Free Vendor Images
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Started with Free Vendor Images">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#available-free-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available Free Images
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Available Free Images">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-arista-ceos-cloud-edition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Arista cEOS (Cloud Edition)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-nokia-sr-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Nokia SR Linux
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-cisco-xe-subscription-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Cisco XE (Subscription Required)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-juniper-images-various-licenses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Juniper Images (Various Licenses)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#downloading-free-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Downloading Free Images
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traffic-generation-with-ostinato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traffic Generation with Ostinato
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Traffic Generation with Ostinato">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-ostinato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is Ostinato?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-ostinato-in-containerlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing Ostinato in ContainerLab
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installing Ostinato in ContainerLab">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method-1-using-official-ostinato-docker-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method 1: Using Official Ostinato Docker Image
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method-2-alternative-open-source-traffic-generators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method 2: Alternative Open-Source Traffic Generators
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integrating-ostinato-with-containerlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integrating Ostinato with ContainerLab
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integrating Ostinato with ContainerLab">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-traffic-generation-topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic Traffic Generation Topology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-traffic-generation-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Traffic Generation Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-traffic-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating Traffic Profiles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-traffic-generator-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using Traffic Generator Interfaces
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using Traffic Generator Interfaces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accessing-traffic-generator-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing Traffic Generator Interfaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-line-traffic-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command-Line Traffic Generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoring-and-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoring and Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-with-network-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration with Network Automation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Best Practices
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-traffic-planning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Traffic Planning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-resource-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Resource Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-configuration-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Configuration Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-monitoring-and-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Monitoring and Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-your-first-lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating Your First Lab
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-lab-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Lab Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Lab Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ansible-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ansible Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#working-with-different-vendor-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Working with Different Vendor Images
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lab-management-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab Management Commands
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-with-automation-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration with Automation Tools
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration with Automation Tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ansible-role-integration-coming-soon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ansible Role Integration (Coming Soon)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Best Practices
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-image-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Image Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-topology-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Topology Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-configuration-management_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Configuration Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-automation-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Automation Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-resource-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Resource Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#official-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Official Documentation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tutorials-and-guides" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tutorials and Guides
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vendor-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vendor Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#community-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Community Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2024-06-11 00:00:00+00:00" class="md-ellipsis">June 11, 2024</time>
+                      </div>
+                    </li>
+                    
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              7 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:containerlab" class="md-tag">containerlab</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:docker" class="md-tag">docker</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:lab-environment" class="md-tag">lab environment</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:network-automation" class="md-tag">network automation</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:networking" class="md-tag">networking</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:testing" class="md-tag">testing</a>
+      
+    
+  </nav>
+
+
+  
+  
+
+
+<h1 id="containerlab">ContainerLab</h1>
+<p><img src="https://camo.githubusercontent.com/223ecd49b5a869d166bd6b86752960600ccb5fb10b8b5bc278e51ba06550690e/68747470733a2f2f6769746c61622e636f6d2f72646f64696e2f706963732f2d2f77696b69732f75706c6f6164732f30316663646332313265653163376465373065663564326138643130393034342f696d6167652e706e67" alt="ContainerLab Logo" class="tool-image"></p>
+<p><a href="https://containerlab.dev/">ContainerLab</a> is a <strong>container-based network lab orchestrator</strong> that allows you to create and manage network topologies using containerized network operating systems. It's perfect for network automation testing, learning, and development without the overhead of traditional virtualization.</p>
+<!-- more -->
+
+<h2 id="what-is-containerlab">What is ContainerLab?</h2>
+<p>ContainerLab is an open-source tool that enables you to:
+- <strong>Deploy network topologies</strong> using containerized network operating systems
+- <strong>Test network automation</strong> with real network devices
+- <strong>Create reproducible lab environments</strong> for learning and development
+- <strong>Run multiple vendor images</strong> in a single lab topology
+- <strong>Integrate with automation tools</strong> like Ansible, Nornir, and Terraform</p>
+<h2 id="key-features">Key Features</h2>
+<ul>
+<li><strong>Multi-vendor Support</strong>: Cisco, Arista, Nokia, Juniper, and more</li>
+<li><strong>Docker-based</strong>: Lightweight and fast deployment</li>
+<li><strong>Topology Management</strong>: YAML-based topology definitions</li>
+<li><strong>CLI Interface</strong>: Easy-to-use command-line tools</li>
+<li><strong>Integration Ready</strong>: Works with popular automation tools</li>
+<li><strong>Free Images</strong>: Support for vendor images that can be used freely</li>
+</ul>
+<h2 id="installation-guide">Installation Guide</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li><strong>Linux</strong> (Ubuntu 20.04+, CentOS 8+, or similar)</li>
+<li><strong>Docker</strong> installed and running</li>
+<li><strong>Docker Compose</strong> (optional, for advanced setups)</li>
+<li><strong>Git</strong> for cloning repositories</li>
+</ul>
+<h3 id="step-1-install-docker">Step 1: Install Docker</h3>
+<p>For detailed Docker installation instructions, see the <a href="/tutorials/containerlab_getting_started/">ContainerLab Getting Started Guide</a>.</p>
+<p><strong>Supported platforms:</strong>
+- Ubuntu 20.04+ / Debian
+- CentOS 8+ / RHEL 8+
+- Other Linux distributions with Docker support</p>
+<h3 id="step-2-install-containerlab">Step 2: Install ContainerLab</h3>
+<p>For detailed ContainerLab installation instructions, see the <a href="/tutorials/containerlab_getting_started/">ContainerLab Getting Started Guide</a>.</p>
+<p><strong>Installation methods:</strong>
+- Official install script (recommended)
+- Manual installation from GitHub releases
+- Docker-based installation
+- Package manager installation</p>
+<h3 id="step-3-install-additional-tools-optional">Step 3: Install Additional Tools (Optional)</h3>
+<p>For detailed instructions on installing additional tools, see the <a href="/tutorials/containerlab_getting_started/">ContainerLab Getting Started Guide</a>.</p>
+<p><strong>Optional tools:</strong>
+- Docker Compose (for advanced deployments)
+- Network utilities (bridge-utils, iproute2, net-tools, tcpdump)
+- Monitoring tools (Grafana, Prometheus)
+- Web UI components</p>
+<h3 id="step-4-docker-compose-installation-alternative-method">Step 4: Docker Compose Installation (Alternative Method)</h3>
+<p>For those who prefer using Docker Compose for ContainerLab deployment, see the <a href="/tutorials/containerlab_getting_started/">ContainerLab Getting Started Guide</a> for complete setup instructions.</p>
+<p><strong>Docker Compose features:</strong>
+- Complete ContainerLab environment in containers
+- Optional Web UI for lab management
+- Monitoring with Grafana and Prometheus
+- Persistent storage and configuration management</p>
+<h3 id="step-5-ansible-role-deployment-coming-soon">Step 5: Ansible Role Deployment (Coming Soon)</h3>
+<p><strong>Note</strong>: An Ansible role for automated ContainerLab deployment will be created and made available. This role will include:</p>
+<ul>
+<li>Automated Docker installation</li>
+<li>ContainerLab installation and configuration</li>
+<li>Pre-configured lab topologies</li>
+<li>Integration with existing automation workflows</li>
+<li>Support for multiple deployment scenarios</li>
+</ul>
+<p>The Ansible role will be published to the <a href="https://github.com/bsmeding/ansible-role-containerlab">bsmeding.containerlab</a> repository and will be available through Ansible Galaxy.</p>
+<h2 id="getting-started-with-free-vendor-images">Getting Started with Free Vendor Images</h2>
+<p>For a step-by-step tutorial on setting up ContainerLab and downloading vendor images, see the <a href="/tutorials/containerlab_getting_started/">ContainerLab Getting Started Guide</a>.</p>
+<h3 id="available-free-images">Available Free Images</h3>
+<h4 id="1-arista-ceos-cloud-edition">1. <strong>Arista cEOS (Cloud Edition)</strong></h4>
+<ul>
+<li><strong>License</strong>: Free for lab use</li>
+<li><strong>Download</strong>: Available from Arista website</li>
+<li><strong>Features</strong>: Full EOS functionality, REST API, eAPI</li>
+</ul>
+<h4 id="2-nokia-sr-linux">2. <strong>Nokia SR Linux</strong></h4>
+<ul>
+<li><strong>License</strong>: Free for lab use</li>
+<li><strong>Download</strong>: Available from GitHub Container Registry</li>
+<li><strong>Features</strong>: Full SR Linux functionality, gNMI, gRPC</li>
+</ul>
+<h4 id="3-cisco-xe-subscription-required">3. <strong>Cisco XE (Subscription Required)</strong></h4>
+<ul>
+<li><strong>License</strong>: Requires Cisco subscription</li>
+<li><strong>Download</strong>: Available through Cisco DevNet</li>
+<li><strong>Features</strong>: Full IOS XE functionality, RESTCONF, NETCONF</li>
+</ul>
+<h4 id="4-juniper-images-various-licenses">4. <strong>Juniper Images (Various Licenses)</strong></h4>
+<ul>
+<li><strong>Available</strong>: cRPD, vQFX, vSRX, vJunos-router, vJunos-switch, vJunosEvolved, cJunosEvolved</li>
+<li><strong>Download</strong>: Available through Juniper support portal</li>
+<li><strong>Features</strong>: Full Junos functionality, NETCONF, REST API</li>
+</ul>
+<h3 id="downloading-free-images">Downloading Free Images</h3>
+<p>For detailed instructions on downloading and importing vendor images, see the <a href="/tutorials/containerlab_getting_started/">ContainerLab Getting Started Guide</a>.</p>
+<p><strong>Available free images:</strong>
+- Arista cEOS (requires registration)
+- Nokia SR Linux (available from GitHub Container Registry)
+- Other vendor images with various licensing requirements</p>
+<h2 id="traffic-generation-with-ostinato">Traffic Generation with Ostinato</h2>
+<p>For comprehensive network testing and validation, you can use <strong>Ostinato</strong> - a powerful traffic generator that integrates seamlessly with ContainerLab. Ostinato allows you to generate realistic network traffic to test your configurations, validate QoS policies, and measure network performance.</p>
+<h3 id="what-is-ostinato">What is Ostinato?</h3>
+<p>Ostinato is a commercial network packet generator and analyzer that supports:
+- <strong>Multiple protocols</strong>: TCP, UDP, ICMP, ARP, BGP, OSPF, and more
+- <strong>Custom packet crafting</strong>: Full control over packet headers and payloads
+- <strong>Traffic patterns</strong>: Burst, continuous, and custom traffic patterns
+- <strong>Statistics</strong>: Real-time packet statistics and analysis
+- <strong>Container support</strong>: Runs natively in Docker containers
+- <strong>Multiple platforms</strong>: Windows, macOS, Linux, Raspberry Pi, Docker containers</p>
+<p><strong>Pricing Tiers:</strong>
+- <strong>Starter</strong>: $49+/user (single platform)
+- <strong>Pro Bundle</strong>: $169+/user/yr (multiple platforms, email support)
+- <strong>Business Bundle</strong>: $289+/user/yr (all platforms, priority support)</p>
+<h3 id="installing-ostinato-in-containerlab">Installing Ostinato in ContainerLab</h3>
+<h4 id="method-1-using-official-ostinato-docker-image">Method 1: Using Official Ostinato Docker Image</h4>
+<p>For detailed Ostinato installation instructions, see the <a href="/tutorials/containerlab_getting_started/">ContainerLab Getting Started Guide</a>.</p>
+<p><strong>Note</strong>: Ostinato requires a valid license to use. Visit <a href="https://ostinato.org/pricing/">https://ostinato.org/pricing/</a> for licensing options.</p>
+<h4 id="method-2-alternative-open-source-traffic-generators">Method 2: Alternative Open-Source Traffic Generators</h4>
+<p>Since Ostinato is now commercial, consider these open-source alternatives:</p>
+<p><strong>Available alternatives:</strong>
+- <strong>Scapy</strong> (Python-based packet manipulation)
+- <strong>Iperf3</strong> (Bandwidth testing and measurement)
+- <strong>Pktgen</strong> (High-performance packet generation)
+- <strong>Custom Python scripts</strong> for specific traffic patterns</p>
+<h3 id="integrating-ostinato-with-containerlab">Integrating Ostinato with ContainerLab</h3>
+<h4 id="basic-traffic-generation-topology">Basic Traffic Generation Topology</h4>
+<p>For detailed traffic generation topology examples, see the <a href="/tutorials/containerlab_getting_started/">ContainerLab Getting Started Guide</a>.</p>
+<p><strong>Traffic generator options:</strong>
+- <strong>Ostinato</strong> (commercial, requires license)
+- <strong>Scapy</strong> (open-source Python-based)
+- <strong>Iperf3</strong> (bandwidth testing)
+- <strong>Custom scripts</strong> for specific protocols</p>
+<h4 id="advanced-traffic-generation-configuration">Advanced Traffic Generation Configuration</h4>
+<p>For advanced traffic generation scenarios and configurations, see the <a href="/tutorials/containerlab_getting_started/">ContainerLab Getting Started Guide</a>.</p>
+<p><strong>Advanced features:</strong>
+- Multiple traffic generator types in single topology
+- Custom traffic profiles and scripts
+- Automated traffic testing workflows
+- Integration with network automation tools</p>
+<h3 id="creating-traffic-profiles">Creating Traffic Profiles</h3>
+<p>For detailed traffic profile examples and configurations, see the <a href="/tutorials/containerlab_getting_started.html">ContainerLab Getting Started Guide</a>.</p>
+<p><strong>Traffic profile types:</strong>
+- <strong>BGP traffic profiles</strong> (Ostinato format)
+- <strong>Custom Python scripts</strong> (Scapy-based)
+- <strong>Iperf3 configurations</strong> (bandwidth testing)
+- <strong>Protocol-specific templates</strong> (HTTP, TCP, UDP, etc.)</p>
+<h3 id="using-traffic-generator-interfaces">Using Traffic Generator Interfaces</h3>
+<h4 id="accessing-traffic-generator-interfaces">Accessing Traffic Generator Interfaces</h4>
+<p>For detailed instructions on using traffic generator interfaces, see the <a href="/tutorials/containerlab_getting_started.html">ContainerLab Getting Started Guide</a>.</p>
+<p><strong>Available interfaces:</strong>
+- <strong>Ostinato GUI</strong> (commercial, requires license)
+- <strong>Scapy interactive mode</strong> (open-source)
+- <strong>Iperf3 command-line interface</strong> (open-source)
+- <strong>Custom web interfaces</strong> (for advanced setups)</p>
+<h3 id="command-line-traffic-generation">Command-Line Traffic Generation</h3>
+<p>For detailed command-line traffic generation examples, see the <a href="/tutorials/containerlab_getting_started.html">ContainerLab Getting Started Guide</a>.</p>
+<p><strong>Command-line tools:</strong>
+- <strong>ostinato-drone</strong> (commercial, requires license)
+- <strong>Scapy Python scripts</strong> (open-source)
+- <strong>Iperf3 commands</strong> (open-source)
+- <strong>Custom automation scripts</strong> (bash, Python, etc.)</p>
+<h3 id="monitoring-and-analysis">Monitoring and Analysis</h3>
+<p>For detailed monitoring and analysis examples, see the <a href="/tutorials/containerlab_getting_started.html">ContainerLab Getting Started Guide</a>.</p>
+<p><strong>Monitoring capabilities:</strong>
+- <strong>Real-time statistics</strong> from traffic generators
+- <strong>Packet capture and analysis</strong> with tcpdump
+- <strong>Network performance metrics</strong> collection
+- <strong>Traffic pattern analysis</strong> and reporting</p>
+<h3 id="integration-with-network-automation">Integration with Network Automation</h3>
+<p>For detailed network automation integration examples, see the <a href="/tutorials/containerlab_getting_started.html">ContainerLab Getting Started Guide</a>.</p>
+<p><strong>Automation integration:</strong>
+- <strong>Ansible playbooks</strong> for traffic testing
+- <strong>Python scripts</strong> for automated testing
+- <strong>CI/CD pipeline integration</strong> for continuous testing
+- <strong>Custom automation workflows</strong> for specific use cases</p>
+<h3 id="best-practices">Best Practices</h3>
+<h4 id="1-traffic-planning">1. <strong>Traffic Planning</strong></h4>
+<ul>
+<li>Define clear test objectives</li>
+<li>Use realistic traffic patterns</li>
+<li>Consider network capacity limits</li>
+<li>Plan for different traffic types</li>
+</ul>
+<h4 id="2-resource-management">2. <strong>Resource Management</strong></h4>
+<ul>
+<li>Monitor system resources during traffic generation</li>
+<li>Use appropriate packet rates</li>
+<li>Clean up completed test sessions</li>
+<li>Limit concurrent traffic streams</li>
+</ul>
+<h4 id="3-configuration-management">3. <strong>Configuration Management</strong></h4>
+<ul>
+<li>Store traffic profiles in version control</li>
+<li>Document traffic patterns and purposes</li>
+<li>Use consistent naming conventions</li>
+<li>Create reusable traffic templates</li>
+</ul>
+<h4 id="4-monitoring-and-validation">4. <strong>Monitoring and Validation</strong></h4>
+<ul>
+<li>Monitor network device statistics</li>
+<li>Validate QoS policies</li>
+<li>Check for packet loss and latency</li>
+<li>Analyze traffic patterns</li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<p>For detailed troubleshooting guides and solutions, see the <a href="/tutorials/containerlab_getting_started.html">ContainerLab Getting Started Guide</a>.</p>
+<p><strong>Common troubleshooting areas:</strong>
+- <strong>Service status verification</strong> and diagnostics
+- <strong>Network connectivity issues</strong> resolution
+- <strong>Performance optimization</strong> techniques
+- <strong>Resource management</strong> and system limits</p>
+<p>For more information about Ostinato, visit <a href="https://ostinato.org/">https://ostinato.org/</a>.</p>
+<h3 id="creating-your-first-lab">Creating Your First Lab</h3>
+<p>For a complete example of building a reusable network automation lab with ContainerLab, see <a href="/blog/posts/2025/2025-08-10-building-reusable-network-automation-lab-with-containerlab.html">Building a Reusable Network Automation Lab with ContainerLab</a>.</p>
+<p>For detailed step-by-step instructions on creating your first lab, see the <a href="/tutorials/containerlab_getting_started.html">ContainerLab Getting Started Guide</a>.</p>
+<p><strong>Basic lab components:</strong>
+- <strong>Network devices</strong> (Arista cEOS, Nokia SR Linux, etc.)
+- <strong>Linux hosts</strong> for testing and automation
+- <strong>Network links</strong> connecting devices
+- <strong>Management network</strong> for device access</p>
+<h2 id="advanced-lab-examples">Advanced Lab Examples</h2>
+<p>For detailed advanced lab examples and configurations, see the <a href="/tutorials/containerlab_getting_started.html">ContainerLab Getting Started Guide</a>.</p>
+<p><strong>Advanced lab types:</strong>
+- <strong>Multi-vendor labs</strong> with different network operating systems
+- <strong>Automation-ready labs</strong> with management servers
+- <strong>Complex topologies</strong> with core/distribution/access layers
+- <strong>Custom configurations</strong> and startup scripts</p>
+<h3 id="ansible-integration">Ansible Integration</h3>
+<p>For detailed Ansible integration examples and playbooks, see the <a href="/tutorials/containerlab_getting_started.html">ContainerLab Getting Started Guide</a>.</p>
+<p><strong>Ansible integration features:</strong>
+- <strong>Inventory management</strong> for network devices and hosts
+- <strong>Network automation playbooks</strong> for device configuration
+- <strong>Multi-vendor support</strong> with different network operating systems
+- <strong>Configuration management</strong> and validation workflows</p>
+<h2 id="working-with-different-vendor-images">Working with Different Vendor Images</h2>
+<p>For detailed instructions on working with different vendor images, see the <a href="/tutorials/containerlab_getting_started.html">ContainerLab Getting Started Guide</a>.</p>
+<p><strong>Supported vendor images:</strong>
+- <strong>Cisco images</strong> (subscription required)
+- <strong>Juniper images</strong> (various licensing requirements)
+- <strong>Arista images</strong> (free for lab use)
+- <strong>Nokia images</strong> (free for lab use)
+- <strong>Other vendor images</strong> with specific licensing terms</p>
+<h2 id="lab-management-commands">Lab Management Commands</h2>
+<p>For detailed lab management commands and examples, see the <a href="/tutorials/containerlab_getting_started.html">ContainerLab Getting Started Guide</a>.</p>
+<p><strong>Basic commands:</strong>
+- <code>containerlab deploy</code> - Deploy lab topologies
+- <code>containerlab destroy</code> - Remove lab deployments
+- <code>containerlab list</code> - List running labs
+- <code>containerlab inspect</code> - Inspect lab details
+- <code>containerlab exec</code> - Execute commands on nodes</p>
+<p><strong>Advanced commands:</strong>
+- <code>containerlab graph</code> - Generate topology graphs
+- <code>containerlab save/load</code> - Save and restore lab states
+- <code>containerlab logs</code> - View lab logs
+- <code>containerlab export</code> - Export lab configurations</p>
+<h2 id="integration-with-automation-tools">Integration with Automation Tools</h2>
+<p>For detailed automation tool integration examples, see the <a href="/tutorials/containerlab_getting_started.html">ContainerLab Getting Started Guide</a>.</p>
+<p><strong>Supported automation tools:</strong>
+- <strong>Nornir</strong> - Python-based network automation framework
+- <strong>Terraform</strong> - Infrastructure as Code integration
+- <strong>Ansible</strong> - Configuration management and automation
+- <strong>Custom Python scripts</strong> - Direct API integration</p>
+<h3 id="ansible-role-integration-coming-soon">Ansible Role Integration (Coming Soon)</h3>
+<p>A dedicated Ansible role for ContainerLab deployment will be available, providing:</p>
+<p><strong>Role features:</strong>
+- <strong>Automated installation</strong> of ContainerLab and dependencies
+- <strong>Lab management</strong> with deployment and destruction workflows
+- <strong>Image management</strong> for vendor network operating systems
+- <strong>Configuration templates</strong> for common lab topologies
+- <strong>Monitoring integration</strong> with Grafana and Prometheus</p>
+<p>The role will be available at: <code>bsmeding.containerlab</code></p>
+<h2 id="troubleshooting_1">Troubleshooting</h2>
+<p>For detailed troubleshooting guides and solutions, see the <a href="/tutorials/containerlab_getting_started.html">ContainerLab Getting Started Guide</a>.</p>
+<p><strong>Common troubleshooting areas:</strong>
+- <strong>Docker permission issues</strong> and user group configuration
+- <strong>Image import problems</strong> and corruption resolution
+- <strong>Network connectivity issues</strong> between containers
+- <strong>Performance optimization</strong> and resource management</p>
+<h2 id="best-practices_1">Best Practices</h2>
+<h3 id="1-image-management">1. <strong>Image Management</strong></h3>
+<ul>
+<li>Keep images organized in a dedicated directory</li>
+<li>Use version tags for images</li>
+<li>Document image sources and licenses</li>
+<li>Regularly update images for security patches</li>
+</ul>
+<h3 id="2-topology-design">2. <strong>Topology Design</strong></h3>
+<ul>
+<li>Use descriptive node names</li>
+<li>Document link purposes</li>
+<li>Use consistent IP addressing schemes</li>
+<li>Keep topologies modular and reusable</li>
+</ul>
+<h3 id="3-configuration-management_1">3. <strong>Configuration Management</strong></h3>
+<ul>
+<li>Store configurations in version control</li>
+<li>Use templates for common configurations</li>
+<li>Document configuration changes</li>
+<li>Test configurations before deployment</li>
+</ul>
+<h3 id="4-automation-integration">4. <strong>Automation Integration</strong></h3>
+<ul>
+<li>Use consistent naming conventions</li>
+<li>Implement proper error handling</li>
+<li>Document automation workflows</li>
+<li>Test automation scripts regularly</li>
+</ul>
+<h3 id="5-resource-management">5. <strong>Resource Management</strong></h3>
+<ul>
+<li>Monitor system resources</li>
+<li>Clean up unused labs</li>
+<li>Use resource limits for containers</li>
+<li>Implement lab lifecycle management</li>
+</ul>
+<h2 id="resources">Resources</h2>
+<h3 id="official-documentation">Official Documentation</h3>
+<ul>
+<li><a href="https://containerlab.dev/">ContainerLab Documentation</a></li>
+<li><a href="https://github.com/srl-labs/containerlab">ContainerLab GitHub</a></li>
+<li><a href="https://containerlab.dev/lab-examples/lab-examples/">ContainerLab Lab Examples</a></li>
+<li><a href="https://github.com/srl-labs/containerlab/tree/master/lab-examples">ContainerLab Examples (GitHub)</a></li>
+</ul>
+<h3 id="tutorials-and-guides">Tutorials and Guides</h3>
+<ul>
+<li><a href="/tutorials/containerlab_getting_started.html">ContainerLab Getting Started Guide</a> - Step-by-step tutorial</li>
+<li><a href="/blog/posts/2025/2025-08-10-building-reusable-network-automation-lab-with-containerlab.html">Building a Reusable Network Automation Lab</a> - Complete lab example</li>
+</ul>
+<h3 id="vendor-resources">Vendor Resources</h3>
+<ul>
+<li><a href="https://www.arista.com/en/support/software-download">Arista cEOS</a></li>
+<li><a href="https://www.nokia.com/networks/solutions/sr-linux/">Nokia SR Linux</a></li>
+<li><a href="https://developer.cisco.com/">Cisco DevNet</a></li>
+<li><a href="https://www.juniper.net/documentation/us/en/software/junos/junos-vm/junos-vm-docker/">Juniper Container Images</a></li>
+</ul>
+<h3 id="community-resources">Community Resources</h3>
+<ul>
+<li><a href="https://github.com/srl-labs/containerlab/discussions">ContainerLab Community</a></li>
+<li><a href="https://github.com/srl-labs/containerlab/tree/master/lab-examples">Network Automation Examples</a></li>
+<li><a href="https://containerlab.dev/blog/">Blog Posts and Tutorials</a></li>
+</ul>
+<p>For more on network automation tools, see the <a href="/tools/">NetDevOps Tools Index</a>.</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 22, 2026 19:58:47 UTC">April 22, 2026</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+  
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/bartsmeding/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand", "navigation.sections", "navigation.indexes", "navigation.prune", "content.code.copy", "content.tabs.link", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../js/giscus.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
+      
+        <script src="../../js/cookieconsent-init.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/zarocknz/javascript-winwheel@2.7.0/Winwheel.min.js"></script>
+      
+        <script src="../../js/wheel.js"></script>
+      
+    
+  </body>
+</html>
