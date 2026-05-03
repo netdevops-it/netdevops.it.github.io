@@ -71,14 +71,14 @@ PLUGINS_CONFIG = {
 
 ## Key admin settings
 
-- `BACKEND`: `containerlab` or `eveng`
-- `BACKEND_URLS`: optional endpoint mapping per backend
+- `BACKEND`: `containerlab` (only supported value)
+- `BACKEND_URLS`: optional URL for Containerlab (`BACKEND_URLS["containerlab"]`)
 - `LOCATION_TYPE_NAME`
 - `CONTAINERLAB_SSH_*` / `CONTAINERLAB_SSH_CREDENTIALS_SECRETS_GROUP`
 - `DIGITAL_TWIN_ROOT`: local filesystem path where generated files are staged
 - `CONTAINERLAB_COMMAND_TIMEOUT_MINUTES`: backend command timeout
 - `DIGITAL_TWIN_JOB_TIMEOUT_MINUTES`: Nautobot job timeout for long deploys
-- `CONTAINERLAB_PLATFORM_MAP` / `EVENG_PLATFORM_MAP`
+- `CONTAINERLAB_PLATFORM_MAP`: map Nautobot platforms to containerlab node definitions
 - `REMOVE_CONFIG_LINES`, `REPLACE_CONFIG_PATTERNS`, `PLATFORM_ADD_CONFIG_LINES`
 - `PLATFORM_REMOVE_CONFIG_LINES`: platform-specific block removal patterns
 - `DIGITAL_TWIN_AUTO_DESTROY_MINUTES`
@@ -108,7 +108,7 @@ PLUGINS_CONFIG = {
 
 ## Source docs
 
-- [Install and Configure](https://github.com/bsmeding/nautobot-app-nautobot-digital-twin/blob/main/docs/admin/install.md)
-- [Upgrade](https://github.com/bsmeding/nautobot-app-nautobot-digital-twin/blob/main/docs/admin/upgrade.md)
-- [Uninstall](https://github.com/bsmeding/nautobot-app-nautobot-digital-twin/blob/main/docs/admin/uninstall.md)
-- [Compatibility Matrix](https://github.com/bsmeding/nautobot-app-nautobot-digital-twin/blob/main/docs/admin/compatibility_matrix.md)
+- [Install and Configure](https://github.com/bsmeding/nautobot-app-digital-twin/blob/main/docs/admin/install.md)
+- [Upgrade](https://github.com/bsmeding/nautobot-app-digital-twin/blob/main/docs/admin/upgrade.md)
+- [Uninstall](https://github.com/bsmeding/nautobot-app-digital-twin/blob/main/docs/admin/uninstall.md)
+- [Compatibility Matrix](https://github.com/bsmeding/nautobot-app-digital-twin/blob/main/docs/admin/compatibility_matrix.md)

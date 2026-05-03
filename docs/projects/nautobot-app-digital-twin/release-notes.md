@@ -9,8 +9,8 @@ This temporary page centralizes release-note links for Nautobot Digital Twin.
 
 ## Release note pages
 
-- [Release Notes Index](https://github.com/bsmeding/nautobot-app-nautobot-digital-twin/blob/main/docs/admin/release_notes/index.md)
-- [v0.1](https://github.com/bsmeding/nautobot-app-nautobot-digital-twin/blob/main/docs/admin/release_notes/version_0.1.md)
+- [Release Notes Index](https://github.com/bsmeding/nautobot-app-digital-twin/blob/main/docs/admin/release_notes/index.md)
+- [v0.1](https://github.com/bsmeding/nautobot-app-digital-twin/blob/main/docs/admin/release_notes/version_0.1.md)
 
 ## Changelog process
 

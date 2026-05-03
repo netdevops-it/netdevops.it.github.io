@@ -29,7 +29,7 @@ The long-term target is full app documentation served from the app repo build pi
 
 ## Source docs
 
-- [Contributing](https://github.com/bsmeding/nautobot-app-nautobot-digital-twin/blob/main/docs/dev/contributing.md)
-- [Development Environment](https://github.com/bsmeding/nautobot-app-nautobot-digital-twin/blob/main/docs/dev/dev_environment.md)
-- [Release Checklist](https://github.com/bsmeding/nautobot-app-nautobot-digital-twin/blob/main/docs/dev/release_checklist.md)
-- [Code Reference Index](https://github.com/bsmeding/nautobot-app-nautobot-digital-twin/blob/main/docs/dev/code_reference/index.md)
+- [Contributing](https://github.com/bsmeding/nautobot-app-digital-twin/blob/main/docs/dev/contributing.md)
+- [Development Environment](https://github.com/bsmeding/nautobot-app-digital-twin/blob/main/docs/dev/dev_environment.md)
+- [Release Checklist](https://github.com/bsmeding/nautobot-app-digital-twin/blob/main/docs/dev/release_checklist.md)
+- [Code Reference Index](https://github.com/bsmeding/nautobot-app-digital-twin/blob/main/docs/dev/code_reference/index.md)
