@@ -2,8 +2,8 @@
 authors: [bsmeding]
 date: 2026-04-18
 title: NetDevOps CI/CD Docker Images for Python Network Automation
-summary: Use the netdevops_cicd Docker images to test Python network automation, render configs, validate data, and run Nornir, Scrapli, Netmiko, NAPALM, Nautobot, and NetBox workflows in CI.
-tags: ["netdevops", "docker", "ci/cd", "network automation", "nornir", "netmiko", "scrapli", "nautobot"]
+summary: Use the netdevops_cicd Docker images to test Python network automation, render configs, validate data, and run Nornir, Scrapli, Netmiko, NAPALM, Nautobot, NetBox, and Cisco API workflows in CI.
+tags: ["netdevops", "docker", "ci/cd", "network automation", "nornir", "netmiko", "scrapli", "nautobot", "cisco", "wingpy"]
 toc: true
 layout: single
 comments: true
@@ -25,6 +25,7 @@ Good fits:
 
 - Nornir, Scrapli, Netmiko, NAPALM, and ncclient jobs.
 - Nautobot and NetBox sync scripts.
+- Cisco API automation for Catalyst Center, SD-WAN vManage, ACI/APIC, FMC, ISE, Meraki, Nexus Dashboard, Hyperfabric, and CML.
 - Config rendering with Jinja2.
 - Unit tests for network automation packages.
 - Structured data validation with YAML, JSON Schema, Pydantic, and JMESPath.
@@ -56,10 +57,67 @@ The image family includes:
 
 - Netmiko, Scrapli, Nornir, NAPALM, ncclient, Paramiko, AsyncSSH.
 - Nautobot and NetBox clients: `pynautobot`, `pynetbox`.
+- Cisco API wrappers: `dnacentersdk` and `wingpy` on Python 3.10+ images.
 - Data and parsing: Jinja2, PyYAML, JSON Schema, JMESPath, TTP, TextFSM, ntc-templates, jc, jtbl, netutils.
 - Data formats and models: OpenPyXL, SQLModel, Pydantic.
 - CI tools: pytest, pytest-cov, pytest-xdist, ruff, mypy, yamllint.
 - Network utilities: DNS tools, nmap, tcpdump, traceroute, ping, iproute, net-tools.
+
+## Cisco API Automation With wingpy
+
+`wingpy` is a useful REST API wrapper for network engineers who need to automate and interact with multiple Cisco tools from the same Python workflow. Instead of learning a different authentication, session, pagination, and URL-building pattern for every platform, `wingpy` provides a consistent client style for common Cisco and network source-of-truth APIs.
+
+The library is documented in the [wingpy user guide](https://wingpy.automation.wingmen.dk/user-guide/) and supports clients for Cisco APIC / ACI, Cisco Catalyst Center, Catalyst SD-WAN vManage, Cisco FMC, Cisco Hyperfabric, Cisco ISE, Cisco Meraki Dashboard, Cisco Modeling Labs, Cisco Nexus Dashboard, Nautobot, NetBox, Splunk Enterprise, and a generic REST client.
+
+Why this matters in CI/CD:
+
+- Pipeline tests can validate that API clients authenticate correctly before merge.
+- Dry-run jobs can read inventory, policies, devices, sites, tenants, or firewall objects from Cisco platforms.
+- Regression tests can verify that API paths, pagination, and response parsing still work after code changes.
+- The same test image can cover Cisco controllers, source-of-truth systems, and generic REST APIs.
+
+`wingpy` uses environment variables such as `WINGPY_APIC_BASE_URL`, `WINGPY_APIC_USERNAME`, `WINGPY_APIC_PASSWORD`, or platform-specific token variables. Authentication happens when the first request is made, so tests can instantiate a client and fail fast when secrets, URLs, or API reachability are wrong.
+
+Example Catalyst Center check:
+
+```python
+import wingpy
+
+
+catalyst_center = wingpy.CiscoCatalystCenter(
+    base_url="https://catalyst-center.example.com",
+    username="admin",
+    password="password",
+    verify=False,
+)
+
+devices = catalyst_center.get("/dna/intent/api/v1/network-device")
+for device in devices.json()["response"]:
+    print(device["hostname"])
+```
+
+Example FMC object check with automatic pagination:
+
+```python
+import wingpy
+
+
+fmc = wingpy.CiscoFMC(
+    base_url="https://fmc.example.com",
+    username="admin",
+    password="password",
+    verify=False,
+)
+
+hosts = fmc.get_all(
+    "/api/fmc_config/v1/domain/{domainUUID}/object/hosts",
+    expanded=True,
+)
+
+assert hosts
+```
+
+`wingpy` requires Python 3.10 or newer, so it is installed only on compatible `netdevops_cicd` image variants. Rocky Linux 9 uses Python 3.9 by default, so that image skips `wingpy` while the Ubuntu 24.04/26.04, Debian 13, and Alpine 3.22/3.23 variants include it.
 
 ## GitHub Actions: Python Test And Lint
 
