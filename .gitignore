@@ -10,3 +10,9 @@
 .gitignore
 .cache/*
 *.py
+site/
+site/
+.venv/
+__pycache__/
+*.pyc
+
