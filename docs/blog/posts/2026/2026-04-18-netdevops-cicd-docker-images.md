@@ -36,7 +36,7 @@ Use another image when:
 
 - You need Ansible, Molecule, or Ansible role testing. Use `ansible_cicd`.
 - You need LLM client and RAG evaluation tooling. Use `aiops_cicd`.
-- You need full cloud/IaC tools like Terraform, Pulumi, PowerShell, AWS CLI, or Azure CLI. Build a project-specific image on top.
+
 
 ## Image Tags
 
