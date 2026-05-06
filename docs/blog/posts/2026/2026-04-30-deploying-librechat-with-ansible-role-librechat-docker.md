@@ -11,6 +11,8 @@ comments: true
 
 # Deploying LibreChat with Ansible Role librechat_docker
 
+![LibreChat demo interface](/images/tools/librechat/demo_light.webp)
+
 If you want a repeatable way to deploy LibreChat, an Ansible role is easier to maintain than hand-editing Docker Compose files on every host. The `bsmeding.librechat_docker` role wraps the upstream stack and gives you consistent variable-driven configuration.
 
 <!-- more -->
