@@ -408,9 +408,11 @@ python tools/check_nautobot_connectivity.py
 network_debug:
   image: bsmeding/netdevops_cicd_ubuntu:latest
   script:
-    - dig nautobot.example.com
-    - traceroute nautobot.example.com || true
-    - nmap -Pn -p 443 nautobot.example.com
+    - dig demo.nautobot.com
+    - traceroute demo.nautobot.com || true
+    - nmap -Pn -p 443 demo.nautobot.com
+    - dig demo.netbox.dev
+    - nmap -Pn -p 443 demo.netbox.dev
     - python tools/check_api_latency.py
 ```
 

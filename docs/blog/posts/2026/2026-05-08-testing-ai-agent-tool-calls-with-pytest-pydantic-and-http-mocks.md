@@ -81,13 +81,13 @@ import responses
 def test_nautobot_get_device_uses_name_filter():
     responses.add(
         responses.GET,
-        "https://nautobot.example.com/api/dcim/devices/",
+        "https://demo.nautobot.com/api/dcim/devices/",
         json={"results": [{"name": "edge-ams1", "role": {"name": "edge"}}]},
         status=200,
     )
 
     device = nautobot_get_device(
-        base_url="https://nautobot.example.com",
+        base_url="https://demo.nautobot.com",
         token="dummy",
         device_name="edge-ams1",
     )
@@ -126,11 +126,11 @@ from httpx import Response
 @pytest.mark.asyncio
 @respx.mock
 async def test_fetch_site():
-    route = respx.get("https://nautobot.example.com/api/dcim/sites/").mock(
+    route = respx.get("https://demo.nautobot.com/api/dcim/sites/").mock(
         return_value=Response(200, json={"results": [{"slug": "ams1"}]})
     )
 
-    sites = await fetch_site("https://nautobot.example.com", "dummy", "ams1")
+    sites = await fetch_site("https://demo.nautobot.com", "dummy", "ams1")
 
     assert route.called
     assert sites[0]["slug"] == "ams1"
@@ -175,6 +175,7 @@ jobs:
 
 ## Practical Tips
 
+- Use demo defaults for examples: `NAUTOBOT_URL=https://demo.nautobot.com`, `NETBOX_URL=https://demo.netbox.dev`.
 - Keep tool schemas small and explicit.
 - Test tools without a model first.
 - Mock APIs for pull requests.

@@ -93,13 +93,13 @@ import responses
 def test_create_device_posts_payload():
     responses.add(
         responses.POST,
-        "https://nautobot.example.com/api/dcim/devices/",
+        "https://demo.nautobot.com/api/dcim/devices/",
         json={"id": "123", "name": "edge-ams1"},
         status=201,
     )
 
     created = create_device(
-        base_url="https://nautobot.example.com",
+        base_url="https://demo.nautobot.com",
         token="dummy",
         payload={"name": "edge-ams1"},
     )
@@ -111,6 +111,15 @@ def test_create_device_posts_payload():
 ## Live Smoke Test
 
 Keep live smoke tests optional:
+
+Use this quick local/demo config to run examples without inventing placeholder URLs:
+
+```bash
+export NAUTOBOT_URL="https://demo.nautobot.com"
+export NAUTOBOT_TOKEN="replace-with-your-nautobot-token"
+export NETBOX_URL="https://demo.netbox.dev"
+export NETBOX_TOKEN="replace-with-your-netbox-token"
+```
 
 ```yaml
 name: Nautobot Smoke
@@ -124,8 +133,10 @@ jobs:
     container:
       image: bsmeding/netdevops_cicd_ubuntu:latest
     env:
-      NAUTOBOT_URL: ${{ secrets.NAUTOBOT_URL }}
+      NAUTOBOT_URL: https://demo.nautobot.com
       NAUTOBOT_TOKEN: ${{ secrets.NAUTOBOT_TOKEN }}
+      NETBOX_URL: https://demo.netbox.dev
+      NETBOX_TOKEN: ${{ secrets.NETBOX_TOKEN }}
     steps:
       - uses: actions/checkout@v5
       - run: pytest tests/live/test_nautobot_smoke.py -vv
