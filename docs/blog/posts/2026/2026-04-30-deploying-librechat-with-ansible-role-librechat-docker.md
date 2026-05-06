@@ -33,7 +33,7 @@ The role:
 
 Repository:
 
-- `ANSIBLE_ROLES/ansible_role_librechat_docker`
+- [Ansible Galaxy: `bsmeding.librechat_docker`](https://galaxy.ansible.com/ui/standalone/roles/bsmeding/librechat_docker/)
 
 ## Minimal Playbook
 
