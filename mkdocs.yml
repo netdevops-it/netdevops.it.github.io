@@ -10,8 +10,9 @@ plugins:
       post_url_format: "{slug}"
       blog_toc: true
       pagination_per_page: 4
-  - tags:
-      tags_file: tags.md
+  # `tags_file` was deprecated in mkdocs-material; the tag listing now lives
+  # in docs/tags.md via the `<!-- material/tags -->` marker.
+  - tags
   - search:
       lang: en
   - git-revision-date-localized
@@ -19,13 +20,40 @@ plugins:
       match_path: blog/posts/.*
       date_from_meta:
         as_creation: date
+  # Auto-generates Open Graph / Twitter social cards.
+  # Requires mkdocs-material[imaging] and Cairo system libs.
+  # Set CARDS=false to skip during local serve if Cairo is unavailable.
+  - social:
+      cards: !ENV [CARDS, true]
+      cards_layout_options:
+        background_color: "#3F51B5"
+        font_family: Roboto
+  # Image lightbox for screenshots (Nautobot, Grafana, etc.).
+  - glightbox:
+      touchNavigation: true
+      loop: false
+      effect: zoom
+      width: auto
+      height: auto
+      zoomable: true
+      draggable: true
+  # 301 redirects when slugs/paths change. Add entries as you rename pages.
+  - redirects:
+      redirect_maps: {}
+  # HTML/CSS/JS minification for smaller pages.
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      htmlmin_opts:
+        remove_comments: true
 
 nav:
   - Home: index.md
   - Nautobot:
     - 'Nautobot the ultimate network CMDB': nautobot_the_ultimate_network_cmdb.md
-    - 'Nautobot Docker Apps': blog/posts/2025/2025-04-10-nautobot-docker-apps.md
-    - 'Import Device Types into Nautobot': blog/posts/2025/2025-09-16-import-device-types-into-nautobot.md
+    - 'Import Device Types into Nautobot': blog/posts/2025/2025-02-04-import-nautobot-device-types.md
+    - 'Introducing Nautobot Zero-to-Hero': blog/posts/2025/2025-11-07-introducing-nautobot-zero-to-hero-series.md
     - 'Nautobot Digital Twin':
       - 'User Guide': projects/nautobot-app-digital-twin/user-guide.md
       - 'Admin Guide': projects/nautobot-app-digital-twin/admin-guide.md
@@ -133,22 +161,48 @@ theme:
     - navigation.sections
     - navigation.indexes
     - navigation.prune
+    - navigation.footer
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - toc.follow
     - content.code.copy
+    - content.code.annotate
     - content.tabs.link
+    - content.action.edit
+    - content.action.view
     - search.share
     - search.suggest
 
 markdown_extensions:
   - admonition
   - attr_list
-  - md_in_html  
+  - md_in_html
   - def_list
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
   - pymdownx.details
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
+      pygments_lang_class: true
   - pymdownx.inlinehilite
-  - pymdownx.superfences
+  - pymdownx.snippets
+  - pymdownx.keys
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 
 ## EXTRA
 extra:

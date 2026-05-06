@@ -1,4 +1,8 @@
 mkdocs>=1.6
-mkdocs-material>=9.6
+# [imaging] pulls in Pillow + CairoSVG for the social-cards plugin.
+mkdocs-material[imaging]>=9.6
 mkdocs-rss-plugin
 mkdocs-git-revision-date-localized-plugin
+mkdocs-redirects
+mkdocs-glightbox
+mkdocs-minify-plugin

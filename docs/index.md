@@ -76,7 +76,7 @@ Roles, collections overview, and Docker Hub images I build and maintain are docu
 - [Git Basics](tutorials/git_basics.md) - Version control fundamentals
 - [Linux Basics](tutorials/linux_basics.md) - Essential Linux commands and concepts
 - [Vagrant Install](tutorials/vagrant_install.md) - Setting up Vagrant for development
-- [Synology Install Docker Compose](tutorials/synology_install_docker_compose.md) - Docker on Synology NAS
+- [ContainerLab Getting Started](tutorials/containerlab_getting_started.md) - Spin up multi-vendor labs in minutes
 - [Enable WSL on Windows](tutorials/enable_wsl_on_windows.md) - Windows Subsystem for Linux setup
 
 **Tutorials Overview:**
@@ -90,7 +90,9 @@ Roles, collections overview, and Docker Hub images I build and maintain are docu
 - **Integration patterns** with Ansible and other automation tools
 
 **Nautobot Resources:**
-- [Nautobot as SSoT/CMDB](nautobot_ssot.md) - Comprehensive guide to using Nautobot
+- [Nautobot, the Ultimate Network CMDB](nautobot_the_ultimate_network_cmdb.md) - Comprehensive guide to using Nautobot
+- [Introducing the Nautobot Zero-to-Hero Series](blog/posts/2025/2025-11-07-introducing-nautobot-zero-to-hero-series.md) - From install to working automation platform
+- [Import Device Types into Nautobot](blog/posts/2025/2025-02-04-import-nautobot-device-types.md) - Bulk-load device-type templates
 - [Nautobot container image (author)](https://bartsmeding.nl/docker/docker_conatiner_nautobot/) — Docker image details on bartsmeding.nl
 
 ### 🔐 **SSO and Authentication Solutions**
@@ -109,9 +111,11 @@ Roles, collections overview, and Docker Hub images I build and maintain are docu
 
 **Latest Blog Posts:**
 
-- [Nautobot Docker Apps](blog/posts/2025/2025-04-10-nautobot-docker-apps.md) - Deploying applications with Nautobot
-- [Getting Started with Network Automation](blog/posts/2025/2025-03-17-getting-started-network-automation.md) - Beginner's guide to network automation
-- [Netdata Monitoring System](blog/posts/2024/2024-11-15-netdata-monitoring-system.md) - Real-time monitoring solution
+- [Introducing the Nautobot Zero-to-Hero Series](blog/posts/2025/2025-11-07-introducing-nautobot-zero-to-hero-series.md) - From install to a working automation platform
+- [Building a Reusable Network Automation Lab with Containerlab](blog/posts/2025/2025-08-10-building-reusable-network-automation-lab-with-containerlab.md) - The standard topology used in the Nautobot series
+- [Supercharge Network Automation with GraphQL](blog/posts/2025/2025-06-12-graphql-network-automation.md) - One query to rule them all (Nautobot, OpsMill)
+- [Getting Started with Network Automation: The Complete Guide](blog/posts/2025/2025-03-17-getting-started-with-network-automation-the-complete-guide.md) - Beginner-friendly entry point
+- [pyATS Testing Tutorial](blog/posts/2025/2025-04-12-pyats-testing-tutorial.md) - Validate network state with Cisco's testing framework
 
 **Tool Reviews and Guides:**
 
@@ -185,7 +189,7 @@ This site is maintained by **Bart Smeding**. For a profile, open-source roles an
 - [Ansible Tutorial 1: Concepts](tutorials/ansible_tutorial_1_concepts.md)
 - [Git Basics](tutorials/git_basics.md)
 - [Linux Basics](tutorials/linux_basics.md)
-- [Getting Started with Network Automation](blog/posts/2025/2025-03-17-getting-started-network-automation.md)
+- [Getting Started with Network Automation: The Complete Guide](blog/posts/2025/2025-03-17-getting-started-with-network-automation-the-complete-guide.md)
 
 ### 🛠️ **Automation Tools**
 - [Ansible roles & Docker (author)](https://bartsmeding.nl/ansible_roles_and_collections/)
@@ -193,8 +197,9 @@ This site is maintained by **Bart Smeding**. For a profile, open-source roles an
 - [Ansible Tool Guide](blog/posts/tools/ansible.md)
 
 ### 🏗️ **Network Management**
-- [Nautobot SSoT](nautobot_ssot.md)
-- [Nautobot Docker Apps](blog/posts/2025/2025-04-10-nautobot-docker-apps.md)
+- [Nautobot, the Ultimate Network CMDB](nautobot_the_ultimate_network_cmdb.md)
+- [Import Device Types into Nautobot](blog/posts/2025/2025-02-04-import-nautobot-device-types.md)
+- [Nautobot Zero-to-Hero Series](blog/posts/2025/2025-11-07-introducing-nautobot-zero-to-hero-series.md)
 
 ### 🐳 **Container Solutions**
 - [Docker images (author)](https://bartsmeding.nl/docker_images/)
@@ -205,8 +210,7 @@ This site is maintained by **Bart Smeding**. For a profile, open-source roles an
 
 ### 📖 **Blog & Insights**
 - [Blog Index](blog/index.md)
-- [Latest Posts](blog/posts/2025/)
-- [Tool Reviews](blog/posts/tools/)
+- [Tag Index](tags.md)
 
 ### 🎓 **Learning Resources**
 - [Courses](courses.md)

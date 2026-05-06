@@ -18,8 +18,12 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.14' 
-      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV 
+          python-version: '3.13'
+      - name: Install Cairo / Pango (needed by social-cards plugin)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcairo2 libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf-2.0-0 libffi-dev
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
       - uses: actions/cache@v4
         with:
           key: mkdocs-material-${{ env.cache_id }}
@@ -30,5 +34,5 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
-      - run: mkdocs build --clean    
+      - run: mkdocs build --clean --strict
       - run: mkdocs gh-deploy --force
