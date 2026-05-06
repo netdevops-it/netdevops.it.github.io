@@ -72,6 +72,8 @@ librechat__env_extra:
 
 If you want LibreChat tools against public demo systems, you can expose an MCP service that talks to Nautobot/NetBox and register it in `librechat.yaml` through role variables.
 
+![LibreChat MCP example with Nautobot](/images/tools/librechat/example_librechat_mcp_nautobot.png)
+
 ```yaml
 librechat__mcp_settings:
   allowedDomains:
