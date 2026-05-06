@@ -111,11 +111,11 @@ Roles, collections overview, and Docker Hub images I build and maintain are docu
 
 **Latest Blog Posts:**
 
-- [Introducing the Nautobot Zero-to-Hero Series](blog/posts/2025/2025-11-07-introducing-nautobot-zero-to-hero-series.md) - From install to a working automation platform
-- [Building a Reusable Network Automation Lab with Containerlab](blog/posts/2025/2025-08-10-building-reusable-network-automation-lab-with-containerlab.md) - The standard topology used in the Nautobot series
-- [Supercharge Network Automation with GraphQL](blog/posts/2025/2025-06-12-graphql-network-automation.md) - One query to rule them all (Nautobot, OpsMill)
-- [Getting Started with Network Automation: The Complete Guide](blog/posts/2025/2025-03-17-getting-started-with-network-automation-the-complete-guide.md) - Beginner-friendly entry point
-- [pyATS Testing Tutorial](blog/posts/2025/2025-04-12-pyats-testing-tutorial.md) - Validate network state with Cisco's testing framework
+- [RAG Evaluation for Network Runbooks with Ragas, DeepEval, and DuckDB](blog/posts/2026/2026-05-12-rag-evaluation-for-network-runbooks-with-ragas-deepeval-and-duckdb.md) - Measure retrieval quality and answer faithfulness for AI-assisted runbooks
+- [Testing AI Agent Tool Calls with pytest, Pydantic, and HTTP Mocks](blog/posts/2026/2026-05-08-testing-ai-agent-tool-calls-with-pytest-pydantic-and-http-mocks.md) - Build fast, reliable tests for tool-calling AI agents
+- [AIOps CI/CD Docker Images for LLM, Agent, Prompt, and RAG Testing](blog/posts/2026/2026-05-05-aiops-cicd-docker-images.md) - Prebuilt images for repeatable AIOps CI pipelines
+- [Deploying LibreChat with Ansible Role librechat_docker](blog/posts/2026/2026-04-30-deploying-librechat-with-ansible-role-librechat-docker.md) - Self-host LibreChat quickly with a reusable Ansible role
+- [Python Network Automation Dry Runs with Nornir, Scrapli, and Netmiko](blog/posts/2026/2026-04-28-python-network-automation-dry-runs-with-nornir-scrapli-netmiko.md) - Safely preview network changes before execution
 
 **Tool Reviews and Guides:**
 
