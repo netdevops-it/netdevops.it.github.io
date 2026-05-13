@@ -147,7 +147,9 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         const w = Math.min(1024, Math.max(128, parseInt(widthInput.value, 10) || 256));
-        const marginSafe = Math.min(8, Math.max(0, parseInt(marginInput.value, 10) || 0));
+        let marginRaw = parseInt(marginInput.value, 10);
+        if (Number.isNaN(marginRaw)) marginRaw = 2;
+        const marginSafe = Math.min(8, Math.max(0, marginRaw));
         try {
             const dataUrl = await QRCode.toDataURL(text, {
                 width: w,

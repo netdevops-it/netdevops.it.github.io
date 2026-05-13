@@ -155,7 +155,7 @@ A comprehensive collection of client-side developer tools designed for network a
 ### **Security Professionals**
 - **Hash Generator**: Digital signatures, integrity verification
 - **Base64 Converter**: Encoded data analysis
-- **QR Code Generator**: Encode non-sensitive test payloads only in untrusted environments
+- **QR Code Generator**: Visualize payloads for docs and training (avoid encoding secrets on shared pages)
 - **URL Encoder**: Security testing, input validation
 - **Regex Tester**: Pattern matching for security rules
 
