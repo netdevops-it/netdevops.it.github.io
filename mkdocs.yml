@@ -112,6 +112,7 @@ nav:
     - 'JSON Validator': online-dev-tools/json-validator.md
     - 'Diff Tool': online-dev-tools/diff-tool.md
     - 'Base64 Converter': online-dev-tools/base64-converter.md
+    - 'QR Code Generator': online-dev-tools/qr-code-generator.md
     - 'URL Encoder/Decoder': online-dev-tools/url-encoder.md
     - 'Hash Generator': online-dev-tools/hash-generator.md
     - 'Color Converter': online-dev-tools/color-converter.md
