@@ -215,6 +215,8 @@ extra:
     property: G-LF84C44PGC
 
 extra_javascript:
+  - js/page-ready.js
+  - js/mkdocs-instant-scripts.js
   - js/giscus.js
   - https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js
   - js/cookieconsent-init.js

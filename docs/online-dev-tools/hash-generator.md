@@ -68,7 +68,7 @@ A comprehensive hash generator supporting multiple algorithms. Generate cryptogr
 
 <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+onPageReady(function() {
 console.log('Hash generator DOM loaded');
 const input = document.getElementById("hash-input");
 const algorithmSelect = document.getElementById("algorithm-select");

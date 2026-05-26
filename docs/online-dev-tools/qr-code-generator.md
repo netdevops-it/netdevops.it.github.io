@@ -76,7 +76,7 @@ function clearCanvas(canvas) {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+onPageReady(() => {
     const input = document.getElementById("qr-input");
     const canvas = document.getElementById("qr-canvas");
     const widthInput = document.getElementById("qr-width");
