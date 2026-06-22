@@ -1,6 +1,5 @@
 ---
-
-## authors: [bsmeding]
+authors: [bsmeding]
 date: 2026-06-13
 title: Writing Python Functions for Humans and AI - Docstrings, Type Hints, and Auto-Documentation
 summary: Write Python functions that are easy to read, type-checked, and self-documenting so they help the next engineer and let AI tools reliably check, extend, and refactor your code.
@@ -8,6 +7,7 @@ tags: ["python", "docstrings", "type hints", "ai", "mypy", "ruff", "pydantic", "
 toc: true
 layout: single
 comments: true
+---
 
 # Writing Python Functions for Humans and AI
 
