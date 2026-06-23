@@ -1,6 +1,6 @@
 ---
 authors: [bsmeding]
-date: 2026-06-24
+date: 2026-05-24
 title: Nautobot Digital Twin - Disposable Labs Straight From Your Source of Truth
 summary: A Nautobot app that turns Location, Device, Interface, and Cable data into disposable containerlab topologies, with Golden Config intended-config push, connectivity tests, and automatic cleanup driven entirely from Nautobot jobs.
 tags: ["nautobot", "digital twin", "containerlab", "golden config", "network automation", "labs", "netdevops"]
@@ -10,6 +10,8 @@ comments: true
 ---
 
 # Nautobot Digital Twin
+
+![Nautobot to containerlab topology flow](/images/nautobot/Nautobot_to_containerlab.png)
 
 Your network exists twice: once in production, and once in Nautobot as the source of truth. What is usually missing is a third copy, a place where you can actually *run* the topology, push a config change, and watch what happens before it touches real hardware.
 
