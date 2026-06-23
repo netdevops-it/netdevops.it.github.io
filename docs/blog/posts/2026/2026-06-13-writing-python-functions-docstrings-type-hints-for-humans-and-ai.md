@@ -11,6 +11,8 @@ comments: true
 
 # Writing Python Functions for Humans and AI
 
+![Auto-generated docstring example from Python code](/images/blogs/python_code_autodocstring_example.png)
+
 Why is my AI / LLM not constructing my Python program or documentation correctly?
 
 Most Python functions are written once and read many times. The reader used to be a coworker, your future self, or a reviewer. Today there is a new reader: the AI tools you use to explain, check, refactor, and extend your code.
