@@ -19,7 +19,7 @@ Most Python functions are written once and read many times. The reader used to b
 
 Good docstrings and type hints were always worth the effort. Now they pay off twice: a well-described function is easier for a human to trust *and* gives an AI assistant the context it needs to make correct changes instead of guessing.
 
-
+<!-- more -->
 
 ## Why This Matters More With AI
 

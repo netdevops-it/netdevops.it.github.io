@@ -42,6 +42,8 @@ The app is driven entirely through Nautobot Jobs and uses containerlab as its de
 
 Because the topology is regenerated from Nautobot each time, the twin always reflects the current source of truth. Added a device or a cable? Run **Redeploy** and the lab catches up.
 
+![Start digital twin from site overview](/images/nautobot/digitaltwin1.png)
+
 ## Install
 
 The app is published on PyPI:
@@ -114,6 +116,8 @@ Disposable environments are only useful if they actually get disposed of. The ap
 - **Auto-destroy** - `DIGITAL_TWIN_AUTO_DESTROY_MINUTES` stamps each deployment with an expiry, and the scheduled auto-destroy job cleans up anything past its time.
 
 This keeps a shared lab host from filling up with forgotten topologies.
+
+![Overview historical digital twins](/images/nautobot/digitaltwin2.png)
 
 ## Tuning the Generated Config
 
