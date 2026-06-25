@@ -16,7 +16,7 @@ To get everything working i needed to copy some files from the host to the VM. V
 
 So because it was now the 3rd time i needed to search on the web, i write it down here so i can find it quicker next time.
 
-![Make shared folder available](images/ubuntu/make_shared_folder_available.png)
+![Make shared folder available](/images/ubuntu/make_shared_folder_available.png)
 <!-- more -->
 
 First install open-vm-tools

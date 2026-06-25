@@ -19,7 +19,7 @@ When it comes to network automation, **Nautobot** is the one platform that has c
 
 ---
 
-![Nautobot UI Dashboard](images/nautobot_dashboard.png)
+![Nautobot UI Dashboard](tutorials/nautobot_zero_to_hero/images/nautobot_dashboard.png)
 
 ---
 
@@ -85,7 +85,7 @@ The compliance plugin compares live device configurations with golden standards 
 
 Another powerful feature I rely on is **job approvals**.
 
-![Job Approval Request](images/nautobot/job_approval.png)
+<!-- TODO: re-add image when available — was: ![Job Approval Request](images/nautobot/job_approval.png) -->
 
 With the built-in 4-eyes principle, I can require approval before running any job that pushes changes to production. This ensures accountability and meets internal change control policies.
 
@@ -140,7 +140,7 @@ def provision_vlans(site):
 
 All jobs are modular and accessible via the web UI:
 
-![Job Execution View](images/nautobot/job_execution_ui.png)
+<!-- TODO: re-add image when available — was: ![Job Execution View](images/nautobot/job_execution_ui.png) -->
 
 ---
 

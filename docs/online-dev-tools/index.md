@@ -68,6 +68,17 @@ A comprehensive collection of client-side developer tools designed for network a
     </div>
 
     <div class="tool-card">
+        <h3>📱 QR Code Generator</h3>
+        <p>Create QR codes from URLs or text in your browser. Adjustable size, error correction, and PNG download.</p>
+        <div class="tool-features">
+            <span class="feature">Live preview</span>
+            <span class="feature">ECC levels</span>
+            <span class="feature">Download PNG</span>
+        </div>
+        <a href="/online-dev-tools/qr-code-generator/" class="tool-link">Open Tool →</a>
+    </div>
+
+    <div class="tool-card">
         <h3>🔗 URL Encoder/Decoder</h3>
         <p>Encode and decode URLs with multiple encoding schemes. Standard, component, and full encoding options.</p>
         <div class="tool-features">
@@ -122,6 +133,7 @@ A comprehensive collection of client-side developer tools designed for network a
 
 ### **Network Engineers**
 - **Base64 Converter**: Encode configuration data, API credentials
+- **QR Code Generator**: Share links, Wi‑Fi setup, or short text as scannable codes
 - **Hash Generator**: Verify file integrity, generate API signatures  
 - **URL Encoder**: Handle special characters in network configurations
 - **YAML/JSON Validators**: Validate configuration files
@@ -130,6 +142,7 @@ A comprehensive collection of client-side developer tools designed for network a
 - **YAML/JSON Validators**: Validate configuration files and manifests
 - **Hash Generator**: Verify artifact integrity, password hashing
 - **Base64 Converter**: Handle secrets and encoded data
+- **QR Code Generator**: Quick links to runbooks, dashboards, or guest Wi‑Fi
 - **Diff Tool**: Compare configuration versions
 
 ### **Web Developers**
@@ -137,10 +150,12 @@ A comprehensive collection of client-side developer tools designed for network a
 - **Regex Tester**: Data validation, log parsing
 - **URL Encoder**: API parameters, form data
 - **JSON Validator**: API responses, configuration
+- **QR Code Generator**: Deep links and marketing collateral without a separate app
 
 ### **Security Professionals**
 - **Hash Generator**: Digital signatures, integrity verification
 - **Base64 Converter**: Encoded data analysis
+- **QR Code Generator**: Visualize payloads for docs and training (avoid encoding secrets on shared pages)
 - **URL Encoder**: Security testing, input validation
 - **Regex Tester**: Pattern matching for security rules
 
@@ -171,7 +186,7 @@ A comprehensive collection of client-side developer tools designed for network a
 |----------|-------|-------------|
 | **Data Validation** | YAML Validator, JSON Validator | Configuration files, API responses |
 | **Text Processing** | Diff Tool, Regex Tester | Code review, data validation |
-| **Encoding** | Base64 Converter, URL Encoder | Data transmission, API parameters |
+| **Encoding** | Base64 Converter, URL Encoder, QR Code Generator | Data transmission, API parameters, scannable links |
 | **Security** | Hash Generator | Integrity verification, authentication |
 | **Design** | Color Converter | Web development, accessibility |
 

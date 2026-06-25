@@ -49,7 +49,7 @@ A comprehensive URL encoding and decoding tool. Convert special characters to UR
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+onPageReady(function() {
 console.log('URL encoder DOM loaded');
 const input = document.getElementById("url-input");
 const output = document.getElementById("url-output");

@@ -102,7 +102,7 @@ See role variables for:
 ## Full Install
 To install all tools on one server, use the `install_full.yml` playbook. Make sure the hostname (e.g. `srv1`) matches your inventory file.
 
-All settings for the full install are in [roles/full_install_config/defaults/main.yml](roles/full_install_config/defaults/main.yml).
+All settings for the full install are in `roles/full_install_config/defaults/main.yml` of the playbook repository.
 
 **Full install will:**
 - Install Docker

@@ -78,7 +78,7 @@ docker run -d \
 - Visit [http://localhost:19999](http://localhost:19999) after starting the container.
 - For more options, see the [Netdata Docker docs](https://learn.netdata.cloud/docs/agent/packaging/docker/).
 
-> **Coming soon:** I will publish an [Ansible role](/ansible/ansible_role_netdata_docker/) to automate Netdata deployment with Docker as part of my [automation resources](/ansible_roles_and_collections/). Stay tuned!
+> **Coming soon:** I will publish an Ansible role to automate Netdata deployment with Docker as part of my [automation resources on bartsmeding.nl](https://bartsmeding.nl/ansible_roles_and_collections/). Stay tuned!
 
 ### 3. Other Installation Methods
 

@@ -7,8 +7,8 @@ This tutorial provides two methods for deploying a production-ready Nautobot ins
 
 ## Navigation
 
-- [Install Nautobot in Docker](install_nautobot_in_docker.html) (current)
-- [Install Nautobot Development Environment in Docker](install_nautobot_development_in_docker.html)
+- [Install Nautobot in Docker](install_nautobot_in_docker.md) (current)
+- [Install Nautobot Development Environment in Docker](install_nautobot_development_in_docker.md)
 
 ## Prerequisites
 
