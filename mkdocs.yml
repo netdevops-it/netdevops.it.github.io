@@ -108,6 +108,7 @@ nav:
   - Web Tools:
     - 'Web Tools Overview': online-dev-tools/index.md
     - 'YAML Validator': online-dev-tools/yaml-validator.md
+    - 'YAML ↔ JSON Converter': online-dev-tools/yaml-json-converter.md
     - 'Regex Tester': online-dev-tools/regex-tester.md
     - 'JSON Validator': online-dev-tools/json-validator.md
     - 'Diff Tool': online-dev-tools/diff-tool.md

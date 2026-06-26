@@ -42,6 +42,17 @@ A comprehensive collection of client-side developer tools designed for network a
     </div>
 
     <div class="tool-card">
+        <h3>🔄 YAML ↔ JSON Converter</h3>
+        <p>Convert between YAML and JSON in both directions. Choose readable or one-line JSON output.</p>
+        <div class="tool-features">
+            <span class="feature">Bidirectional</span>
+            <span class="feature">Pretty or compact JSON</span>
+            <span class="feature">Swap &amp; copy</span>
+        </div>
+        <a href="/online-dev-tools/yaml-json-converter/" class="tool-link">Open Tool →</a>
+    </div>
+
+    <div class="tool-card">
         <h3>📊 Diff Tool</h3>
         <p>Compare text differences with side-by-side highlighting. Perfect for configuration and code comparison.</p>
         <div class="tool-features">
@@ -184,7 +195,7 @@ A comprehensive collection of client-side developer tools designed for network a
 
 | Category | Tools | Primary Use |
 |----------|-------|-------------|
-| **Data Validation** | YAML Validator, JSON Validator | Configuration files, API responses |
+| **Data Validation** | YAML Validator, JSON Validator, YAML ↔ JSON Converter | Configuration files, API responses |
 | **Text Processing** | Diff Tool, Regex Tester | Code review, data validation |
 | **Encoding** | Base64 Converter, URL Encoder, QR Code Generator | Data transmission, API parameters, scannable links |
 | **Security** | Hash Generator | Integrity verification, authentication |
