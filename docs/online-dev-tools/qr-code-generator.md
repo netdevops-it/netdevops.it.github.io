@@ -59,9 +59,7 @@ Generate QR codes as you type. Works for URLs, plain text, Wi‑Fi strings (`WIF
     </div>
 </div>
 
-<script type="module">
-import QRCode from "https://cdn.jsdelivr.net/npm/qrcode@1.5.4/+esm";
-
+<script>
 function debounce(fn, ms) {
     let t;
     return function (...args) {
@@ -76,7 +74,23 @@ function clearCanvas(canvas) {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
-onPageReady(() => {
+onPageReady(async function () {
+    const statusEl = document.getElementById("qr-status");
+
+    function setStatus(message, type = "info") {
+        statusEl.textContent = message;
+        statusEl.className = `status ${type}`;
+    }
+
+    let QRCode;
+    try {
+        setStatus("Loading library…", "info");
+        QRCode = (await import("https://cdn.jsdelivr.net/npm/qrcode@1.5.4/+esm")).default;
+    } catch (err) {
+        setStatus("Failed to load QR library: " + (err.message || err), "error");
+        return;
+    }
+
     const input = document.getElementById("qr-input");
     const canvas = document.getElementById("qr-canvas");
     const widthInput = document.getElementById("qr-width");
@@ -84,13 +98,7 @@ onPageReady(() => {
     const marginInput = document.getElementById("qr-margin");
     const downloadBtn = document.getElementById("qr-download");
     const clearBtn = document.getElementById("qr-clear");
-    const statusEl = document.getElementById("qr-status");
     const metaEl = document.getElementById("qr-meta");
-
-    function setStatus(message, type = "info") {
-        statusEl.textContent = message;
-        statusEl.className = `status ${type}`;
-    }
 
     async function renderQr() {
         const text = (input.value || "").trim();
