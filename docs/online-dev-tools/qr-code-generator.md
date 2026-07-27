@@ -50,135 +50,14 @@ Generate QR codes as you type. Works for URLs, plain text, Wi‑Fi strings (`WIF
     <div class="qr-output-section">
         <label><strong>Preview:</strong></label>
         <div class="qr-canvas-wrap">
-            <canvas id="qr-canvas" width="256" height="256" aria-label="QR code preview"></canvas>
+            <div id="qr-output" aria-label="QR code preview"></div>
         </div>
         <div class="info-panel">
-            <div id="qr-status" class="status info">Loading library…</div>
+            <div id="qr-status" class="status info">Ready</div>
             <div id="qr-meta" class="qr-meta"></div>
         </div>
     </div>
 </div>
-
-<script>
-function debounce(fn, ms) {
-    let t;
-    return function (...args) {
-        clearTimeout(t);
-        t = setTimeout(() => fn.apply(this, args), ms);
-    };
-}
-
-function clearCanvas(canvas) {
-    const ctx = canvas.getContext("2d");
-    ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-}
-
-onPageReady(async function () {
-    const statusEl = document.getElementById("qr-status");
-
-    function setStatus(message, type = "info") {
-        statusEl.textContent = message;
-        statusEl.className = `status ${type}`;
-    }
-
-    let QRCode;
-    try {
-        setStatus("Loading library…", "info");
-        QRCode = (await import("https://cdn.jsdelivr.net/npm/qrcode@1.5.4/+esm")).default;
-    } catch (err) {
-        setStatus("Failed to load QR library: " + (err.message || err), "error");
-        return;
-    }
-
-    const input = document.getElementById("qr-input");
-    const canvas = document.getElementById("qr-canvas");
-    const widthInput = document.getElementById("qr-width");
-    const eccSelect = document.getElementById("qr-ecc");
-    const marginInput = document.getElementById("qr-margin");
-    const downloadBtn = document.getElementById("qr-download");
-    const clearBtn = document.getElementById("qr-clear");
-    const metaEl = document.getElementById("qr-meta");
-
-    async function renderQr() {
-        const text = (input.value || "").trim();
-        const w = Math.min(1024, Math.max(128, parseInt(widthInput.value, 10) || 256));
-        widthInput.value = String(w);
-        let marginRaw = parseInt(marginInput.value, 10);
-        if (Number.isNaN(marginRaw)) {
-            marginInput.value = "2";
-            marginRaw = 2;
-        }
-        const marginSafe = Math.min(8, Math.max(0, marginRaw));
-
-        if (!text) {
-            canvas.width = w;
-            canvas.height = w;
-            clearCanvas(canvas);
-            setStatus("Enter text or a URL to generate a QR code.", "info");
-            metaEl.textContent = "";
-            return;
-        }
-
-        try {
-            await QRCode.toCanvas(canvas, text, {
-                width: w,
-                margin: marginSafe,
-                errorCorrectionLevel: eccSelect.value,
-                color: { dark: "#000000", light: "#ffffff" },
-            });
-            setStatus("QR code updated.", "success");
-            metaEl.textContent = `${text.length} characters · ECC ${eccSelect.value} · ${w}×${w}px`;
-        } catch (err) {
-            clearCanvas(canvas);
-            setStatus(err.message || "Could not generate QR code (content may be too long).", "error");
-            metaEl.textContent = "";
-        }
-    }
-
-    const debouncedRender = debounce(renderQr, 120);
-
-    input.addEventListener("input", debouncedRender);
-    widthInput.addEventListener("change", renderQr);
-    eccSelect.addEventListener("change", renderQr);
-    marginInput.addEventListener("change", renderQr);
-
-    clearBtn.addEventListener("click", () => {
-        input.value = "";
-        renderQr();
-    });
-
-    downloadBtn.addEventListener("click", async () => {
-        const text = (input.value || "").trim();
-        if (!text) {
-            setStatus("Nothing to download — enter content first.", "warning");
-            return;
-        }
-        const w = Math.min(1024, Math.max(128, parseInt(widthInput.value, 10) || 256));
-        let marginRaw = parseInt(marginInput.value, 10);
-        if (Number.isNaN(marginRaw)) marginRaw = 2;
-        const marginSafe = Math.min(8, Math.max(0, marginRaw));
-        try {
-            const dataUrl = await QRCode.toDataURL(text, {
-                width: w,
-                margin: marginSafe,
-                errorCorrectionLevel: eccSelect.value,
-                color: { dark: "#000000", light: "#ffffff" },
-            });
-            const a = document.createElement("a");
-            a.href = dataUrl;
-            a.download = "qrcode.png";
-            a.click();
-            setStatus("PNG download started.", "success");
-        } catch (err) {
-            setStatus(err.message || "Download failed.", "error");
-        }
-    });
-
-    setStatus("Ready — type or paste content to generate.", "success");
-    renderQr();
-});
-</script>
 
 <style>
 .qr-generator-container {
@@ -291,7 +170,13 @@ onPageReady(async function () {
     min-height: 200px;
 }
 
-#qr-canvas {
+#qr-output {
+    display: inline-block;
+    line-height: 0;
+}
+
+#qr-output canvas,
+#qr-output img {
     max-width: 100%;
     height: auto;
     image-rendering: pixelated;
@@ -355,9 +240,9 @@ onPageReady(async function () {
 
 ## Privacy & Security
 
-**Client-side only:** Content is encoded in your browser by the [qrcode](https://www.npmjs.com/package/qrcode) library (MIT), loaded once from [jsDelivr](https://www.jsdelivr.com/). Your text is not sent to NetDevOps.it servers for QR generation.
+**Client-side only:** Content is encoded in your browser using [qrcodejs](https://github.com/davidshimjs/qrcodejs) (MIT), served from this site. Your text is not sent to NetDevOps.it servers for QR generation.
 
 ## Technical Notes
 
 - **Capacity:** Very long payloads can exceed QR limits; the tool shows an error if so.
-- **Offline:** After the first visit, the library may be cached by your browser; a network is still required on first load unless you self-host the script.
+- **Offline:** After the first visit, scripts are cached by your browser.

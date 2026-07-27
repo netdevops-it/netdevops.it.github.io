@@ -224,6 +224,8 @@ extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js
   - https://cdn.jsdelivr.net/gh/zarocknz/javascript-winwheel@2.7.0/Winwheel.min.js
   - js/wheel.js
+  - js/qrcode.min.js
+  - js/qr-code-generator.js
 
 extra_css:
   - https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css
