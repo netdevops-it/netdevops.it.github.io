@@ -14,7 +14,7 @@ draft: false
 
 Your AI assistant is great at writing Python and explaining configs, but it has no idea what is actually in your network. It cannot tell you which devices live in a given site, what prefixes are free, or which circuit terminates where. That knowledge lives in your source of truth.
 
-The [Model Context Protocol](https://modelcontextprotocol.io) (MCP) is the missing link. The `nautobot-mcp-server` exposes [Nautobot](https://docs.nautobot.com/)'s built-in REST and GraphQL APIs as tools that LLM clients such as Claude Desktop and Cursor can call directly, so the assistant answers from your real data instead of guessing.
+The [Model Context Protocol](https://modelcontextprotocol.io) (MCP) is the missing link. The `nautobot-mcp` exposes [Nautobot](https://docs.nautobot.com/)'s built-in REST and GraphQL APIs as tools that LLM clients such as Claude Desktop and Cursor can call directly, so the assistant answers from your real data instead of guessing.
 
 <!-- more -->
 
@@ -26,7 +26,7 @@ That separation is exactly what you want for infrastructure data: the assistant 
 
 ## What the Nautobot MCP Server Does
 
-`nautobot-mcp-server` wraps Nautobot's APIs into discoverable tools across the core data models:
+`nautobot-mcp` wraps Nautobot's APIs into discoverable tools across the core data models:
 
 - **DCIM** - devices, interfaces, locations, racks, device types, cables.
 - **IPAM** - prefixes, IP addresses, VLANs, VRFs, available IPs and prefixes.
@@ -47,7 +47,7 @@ It runs in two ways:
 The package is on PyPI:
 
 ```bash
-pip install nautobot-mcp-server
+pip install nautobot-mcp
 ```
 
 If you use [uv](https://docs.astral.sh/uv/), you do not even need a manual install. `uvx` fetches and runs it on demand, which is handy for desktop clients (more on that below).
@@ -61,7 +61,7 @@ Add an entry to your Cursor MCP config (`~/.cursor/mcp.json`). Using `uvx` avoid
   "mcpServers": {
     "nautobot": {
       "command": "uvx",
-      "args": ["nautobot-mcp-server@latest"],
+      "args": ["nautobot-mcp@latest"],
       "env": {
         "NAUTOBOT_URL": "http://localhost:8081",
         "NAUTOBOT_TOKEN": "YOUR_API_TOKEN"
@@ -82,7 +82,7 @@ Add the same server to `claude_desktop_config.json`:
   "mcpServers": {
     "nautobot": {
       "command": "uvx",
-      "args": ["nautobot-mcp-server@latest"],
+      "args": ["nautobot-mcp@latest"],
       "env": {
         "NAUTOBOT_URL": "http://localhost:8081",
         "NAUTOBOT_TOKEN": "YOUR_API_TOKEN"
@@ -92,14 +92,14 @@ Add the same server to `claude_desktop_config.json`:
 }
 ```
 
-Then fully quit and reopen Claude Desktop (a window close is not enough; the config is read on startup). If you prefer an installed console script over `uvx`, set `"command": "nautobot-mcp-server"` instead, but make sure the binary is on the PATH the client uses.
+Then fully quit and reopen Claude Desktop (a window close is not enough; the config is read on startup). If you prefer an installed console script over `uvx`, set `"command": "nautobot-mcp"` instead, but make sure the binary is on the PATH the client uses.
 
 ## Read-Only by Default
 
 This is the part that matters for production data. Mutating tools (`rest_create`, `rest_update`, `rest_delete`) are blocked unless you explicitly opt in:
 
 ```bash
-export NAUTOBOT_ALLOW_WRITES=true
+export NAUTOBOT_MCP_ALLOW_WRITES=true
 ```
 
 Until you set that, the assistant can read and search everything its token allows, but it cannot change anything. GraphQL queries and Nautobot Job runs are still permitted, because they are already governed by Nautobot's own permission model and the token's scope. Start read-only, build trust, and enable writes only when you are ready.
@@ -109,9 +109,9 @@ Until you set that, the assistant can read and search everything its token allow
 If you run an MSP-style deployment where one server serves agents acting for different customers, you can lock the server to one or more tenants. Enforcement happens centrally in the client, so an agent cannot cross customer boundaries regardless of the filters it passes:
 
 ```bash
-export NAUTOBOT_TENANT_SCOPE="acme,globex"
+export NAUTOBOT_MCP_TENANT_SCOPE="acme,globex"
 # or by tenant group:
-export NAUTOBOT_TENANT_GROUP_SCOPE="managed-customers"
+export NAUTOBOT_MCP_TENANT_GROUP_SCOPE="managed-customers"
 ```
 
 With a scope active:
@@ -139,11 +139,11 @@ The assistant turns each request into a tool call (`search_devices`, `get_availa
 The base install exposes Nautobot core tools only. Tools for the NetworkToCode apps are optional and added via extras:
 
 ```bash
-pip install "nautobot-mcp-server[golden-config]"   # Golden Config tools
-pip install "nautobot-mcp-server[ssot]"            # SSoT tools
-pip install "nautobot-mcp-server[design-builder]"  # Design Builder tools
-pip install "nautobot-mcp-server[onboarding]"      # Device Onboarding tools
-pip install "nautobot-mcp-server[all]"             # everything
+pip install "nautobot-mcp[golden-config]"   # Golden Config tools
+pip install "nautobot-mcp[ssot]"            # SSoT tools
+pip install "nautobot-mcp[design-builder]"  # Design Builder tools
+pip install "nautobot-mcp[onboarding]"      # Device Onboarding tools
+pip install "nautobot-mcp[all]"             # everything
 ```
 
 When the MCP server shares the Nautobot environment, installing the extra is enough; the matching tools register automatically. For a standalone server talking to a remote Nautobot, enable them explicitly with `NAUTOBOT_MCP_PLUGINS="golden_config,ssot"`. Use the `list_active_plugins` tool to see what is configured, enabled, and available.
@@ -153,13 +153,13 @@ When the MCP server shares the Nautobot environment, installing the extra is eno
 Before you point an assistant at a real Nautobot, confirm:
 
 - The API token has the **minimum permissions** the use case needs, not superuser.
-- `NAUTOBOT_ALLOW_WRITES` is left **unset** until you genuinely need writes.
+- `NAUTOBOT_MCP_ALLOW_WRITES` is left **unset** until you genuinely need writes.
 - Tenant scope is set if the server serves multiple customers.
-- TLS verification is on (`NAUTOBOT_VERIFY_SSL=true`) for anything beyond localhost.
+- TLS verification is on (`NAUTOBOT_MCP_VERIFY_SSL=true`) for anything beyond localhost.
 - You are not reusing a shared dev token from a `docker-compose` `.env` in production.
 
 ## Summary
 
 The Nautobot MCP server closes the gap between your AI assistant and your source of truth. It exposes DCIM, IPAM, circuits, tenancy, virtualization, extras, and GraphQL as typed tools, runs standalone or as a Nautobot app, and is read-only by default with optional tenant scoping for multi-tenant isolation. Install it, drop a few lines into your Cursor or Claude Desktop config, point it at Nautobot with a scoped token, and your assistant can finally answer questions about the network you actually run.
 
-The project lives at [github.com/bsmeding/nautobot-app-mcp-server](https://github.com/bsmeding/nautobot-app-mcp-server) and on [PyPI](https://pypi.org/project/nautobot-mcp-server/). Contributions and issues are welcome.
+The project lives at [github.com/bsmeding/nautobot-app-mcp-server](https://github.com/bsmeding/nautobot-app-mcp-server) and on [PyPI](https://pypi.org/project/nautobot-mcp/). Contributions and issues are welcome.
