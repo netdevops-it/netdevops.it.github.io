@@ -16,6 +16,10 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v6
+      with:
+        # Full history so git-revision-date and RSS dates are accurate.
+        # A shallow clone warns, and --strict turns that warning into a failed build.
+        fetch-depth: 0
       
     - name: Set up Python
       uses: actions/setup-python@v6
