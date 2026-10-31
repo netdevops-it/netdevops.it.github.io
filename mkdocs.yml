@@ -59,6 +59,11 @@ nav:
       - 'Admin Guide': projects/nautobot-app-digital-twin/admin-guide.md
       - 'Developer Guide': projects/nautobot-app-digital-twin/developer-guide.md
       - 'Release Notes': projects/nautobot-app-digital-twin/release-notes.md
+    - 'Nautobot MCP Server':
+      - 'User Guide': projects/nautobot-mcp/user-guide.md
+      - 'Admin Guide': projects/nautobot-mcp/admin-guide.md
+      - 'Developer Guide': projects/nautobot-mcp/developer-guide.md
+      - 'Release Notes': projects/nautobot-mcp/release-notes.md
     # - 'Nautobot Zero to Hero':
     #   - 'Overview': tutorials/nautobot_zero_to_hero/00_nautobot-zero-to-hero-landings-page.md
     #   - 'Part 1: Install Nautobot in 5 minutes': tutorials/nautobot_zero_to_hero/01_nautobot-zero-to-hero-part1.md
