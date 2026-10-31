@@ -3,16 +3,15 @@
 - Package name: `nautobot-mcp`
 - Plugin name: `nautobot_mcp`
 - Console script: `nautobot-mcp`
-- Version in the repository: `0.2.4`
+- Version in the repository: `0.2.5`
 - PyPI: [nautobot-mcp](https://pypi.org/project/nautobot-mcp/)
 - GitHub releases: [bsmeding/nautobot-mcp-server](https://github.com/bsmeding/nautobot-mcp-server/releases)
 
-`0.2.4` is the version in the repository. Publishing a GitHub Release uploads that version to PyPI.
-
-## v0.2.4
+## v0.2.5
 
 - The console script is `nautobot-mcp`, so `uvx nautobot-mcp` starts the server. The `nautobot-mcp-server` script from earlier releases is no longer installed.
 - `streamable-http` and `sse` accept `--host` / `--port`, or `NAUTOBOT_MCP_HOST` / `NAUTOBOT_MCP_PORT`. The default stays `127.0.0.1:8000`. Use `--host 0.0.0.0` when a reverse proxy connects from another host.
+- The PyPI homepage points at these docs.
 
 ## v0.2.3
 
